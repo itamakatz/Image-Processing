@@ -1,0 +1,116 @@
+import numpy as np
+
+np.uint8 
+np.float32
+np.complex
+
+np.array(vec)
+
+mat = np.array(a)
+mat.ndim
+mat.T
+
+==
+
+from scipy.misc import imread as imread, imsave as imsave
+
+im = imread(‘dog.jpg’)
+im.dims
+im.shape
+im.shapeim[row,col,0] - (not im[row][col][0])
+im[row,col,:]
+
+im_float = im.astype(np.float32)
+im_float /= 255 (just like +=)
+
+plt.imshow(im_float)
+
+imsave(‘im_dark.png’, im_float)
+
+==
+
+from skimage.color import rgb2gray
+
+im_g = rgb2gray(im)
+im_g.dtype
+im_g.shape
+
+plt.imshow, plt.cm.gray
+plt.imshow(im_g, cmap=plt.cm.gray)
+
+.round().astype(np.uint8)
+im_g = (im_g*255).round().astype(np.uint8)
+
+Matrix Arithmetics
+A*B
+A.dot(B)
+np.linalg.iv(A) - (linalg stands for linear algebra)
+
+.copy()
+head = im[80:280,300:560,:].copy() - (copy important not to modify original file)
+
+np.arange
+a = np.arange(4)**2 + 4
+
+A = np.arange(6)
+A = A.reshape([3,2])
+
+np.newaxis, (1L, 2L) ????
+B = B[np.newaxis,:]
+B = B[:,np.newaxis]
+
+A+B:
+	- Add missing dimensions 
+	- “copy“ along dimensions with size 1
+
+==
+
+matplotlib.pyplot
+http://matplotlib.org/gallery.html
+
+import matplotlib.pyplot as plt
+
+%matplotlib qt #magic
+%matplotlib inline #magic
+
+plt.figure()
+plt.imshow(im)
+plt.axis(‘off’)
+plt.show()
+
+figsize
+plt.figure(figsize=(15,15))
+
+plt.plot(x[::4], np.cos(x[::4]), '.r')
+
+histogram, tick_params, im.flatten():
+hist, bounds = np.histogram(im, 128) 
+plt.tick_params(labelsize=20) 
+plt.plot((bounds[:-1]+bounds[1:])/2, hist) 
+plt.hist(im.flatten(), bins=128)
+
+==
+
+import numpy as np
+
+linalg.solve
+zeros((2,3)) 
+argmax 
+eye(3) 
+cumsum 
+concatenate 
+im.transpose([1,0,2])
+
+==
+
+axis=1
+A.sum(axis=1)
+
+keepdims=True
+A/A.sum(axis=1, keepdims=True).astype(np.float32)
+
+Binary ops
+A > 3
+A[A > 3]
+(A>3) & (A<5)
+np.all(A>3)
