@@ -14,6 +14,11 @@ def reaf_image(filename, representation):
 
     return im
 
-image = reaf_image("/home/itamar/Documents/image_processing/ex1/Files/test files/external/jerusalem.jpg", 1)
-plt.imshow(image, plt.cm.gray)
-plt.show()
+def imdisplay(filename, representation):
+    if(representation == 1):
+        plt.imshow(reaf_image(filename, representation), plt.cm.gray)
+    else:
+        plt.imshow(reaf_image(filename, representation))
+    plt.show()
+
+imdisplay("/home/itamar/Documents/image_processing/ex1/Files/test files/external/jerusalem.jpg", 1)
