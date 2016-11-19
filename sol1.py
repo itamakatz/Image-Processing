@@ -50,9 +50,12 @@ def histogram_equalize(im_orig):
     m_index = (cumulative_histogram[cumulative_histogram > 0])[0]
     # cumulative_histogram = cumulative_histogram/np.max(cumulative_histogram)*255
 
-    linear_streach = 255 * (cumulative_histogram[:] - cumulative_histogram[m_index]) / \
-                     (cumulative_histogram[255] - cumulative_histogram[m_index])
+    linear_streach = (cumulative_histogram[:] - cumulative_histogram[m_index]) / \
+                     (cumulative_histogram[255] - cumulative_histogram[m_index]) * 255
+
     hist_eq = linear_streach.round().astype(np.uint8)
+
+
 
 imRGB = yiq2rgb(rgb2yiq(read_image("/home/itamar/Documents/image_processing/ex1/Files/test files/external/jerusalem.jpg", 2)))
 plt.imshow(imRGB)
