@@ -40,36 +40,87 @@ def yiq2rgb(imYIQ):
     return imRGB
 
 def histogram_equalize(im_orig):
-    # if it is B&W
-    if(im_orig.dims == 1):
+
+    # #
+    # temp_im, im = None, None
+    #
+    # # Checking weather it is a B&W image or comor
+    # if(im_orig.ndim == 2):
+    #     im = im_orig
+    # else:
+    #     temp_im = (rgb2yiq(im_orig))
+    #     im = temp_im[:,:,0]
+    #
+    # # Computing histogram of original image
+    # hist_orig, bins = np.histogram(im.flatten(), 256)
+    # #  Compute thr cumulative histogram
+    # cumulative_histogram = np.cumsum(hist_orig)
+    #
+    # # find first m for which S(m) != 0
+    # m_value = (cumulative_histogram[cumulative_histogram > 0])[0]
+    # # applay linear streachin
+    # cumulative_streach = np.round((cumulative_histogram - m_value) * 255 / (cumulative_histogram[-1] - m_value))
+    #
+    # # computing the hist_eq using an empty vector
+    # # calc_hist_vect = np.zeros((257,))
+    # # calc_hist_vect[1:] = cumulative_streach[:]
+    # # hist_eq = (cumulative_streach - calc_hist_vect[:-1])
+    #
+    # la = np.interp(im, bins[:-1], cumulative_streach)
+    #
+    # if(im_orig.ndim == 2):
+    #     im_eq = la / 255
+    # else:
+    #     temp_im[:,:,0] = la / 255
+    #     im_eq = np.clip(yiq2rgb(temp_im), 0 ,1)
+    #
+    # hist_eq, _ = np.histogram(la, 256)
+    #
+    # return [im_eq, hist_orig, hist_eq]
+
+    temp_im, im = None, None
+
+    # Checking weather it is a B&W image or comor
+    if(im_orig.ndim == 2):
         im = im_orig
     else:
-        im = rgb2yiq(im_orig)[:,:,0]
+        temp_im = (rgb2yiq(im_orig))
+        im = temp_im[:,:,0]
 
-    hist_orig = np.histogram(im, 256)
-    cumulative_histogram = np.histogram(rgb2yiq(im_orig)[:, :, 0], 256, None, False, None, True)
-    # cumulative_histogram = np.cumsum(hist_orig)
-    # cumulative_histogram = cumulative_histogram / cumulative_histogram[255]
+    # Computing histogram of original image
+    hist_orig, bins = np.histogram(im.flatten(), 256)
+    #  Compute thr cumulative histogram
+    cumulative_histogram = np.cumsum(hist_orig)
 
     # find first m for which S(m) != 0
     m_value = (cumulative_histogram[cumulative_histogram > 0])[0]
+    # applay linear streachin
+    cumulative_streach = (cumulative_histogram - m_value) * 255 / (cumulative_histogram[-1] - m_value)
 
-    linear_streach = (cumulative_histogram - m_value) / (cumulative_histogram[255] - m_value) * 255
+    # computing the hist_eq using an empty vector
+    # calc_hist_vect = np.zeros((257,))
+    # calc_hist_vect[1:] = cumulative_streach[:]
+    # hist_eq = (cumulative_streach - calc_hist_vect[:-1])
 
-    calc_hist_vect = np.zeros((256,))
-    calc_hist_vect[1:] = linear_streach[:-1]
+    if(im_orig.ndim == 2):
+        im_eq = np.interp(im.flatten(), bins[:-1], cumulative_streach).reshape(im.shape) / 255
+    else:
+        temp_im[:,:,0] = np.interp(im.flatten(), bins[:-1], cumulative_streach).reshape(im.shape) / 255
+        im_eq = np.clip(yiq2rgb(temp_im), 0 ,1)
 
-    hist_eq = (linear_streach - calc_hist_vect).round().astype(np.uint8)
-
-    im_eq = np.interp(im.flatten(), np.arange(255), hist_eq).reshape(im.shape)
+    hist_eq, _ = np.histogram(im_eq.flatten(), 256)
 
     return [im_eq, hist_orig, hist_eq]
 
+# imRGB = yiq2rgb(rgb2yiq())
 
-imRGB = yiq2rgb(rgb2yiq(read_image("/home/itamar/Documents/image_processing/ex1/Files/test files/external/jerusalem.jpg", 2)))
-plt.imshow(imRGB)
+# # imdisplay("/home/itamar/Documents/image_processing/ex1/Files/test files/external/jerusalem.jpg", 2)
+
+[im_eq, hist_orig, hist_eq] = histogram_equalize(read_image \
+                                ("/home/itamar/Documents/image_processing/ex1/Files/test files/external/monkey.jpg", 2))
+# plt.imshow(im_eq)
+# plt.imshow(im_eq, plt.cm.gray)
+plt.plot(np.arange(256) ,hist_orig)
 plt.show()
-
-imdisplay("/home/itamar/Documents/image_processing/ex1/Files/test files/external/jerusalem.jpg", 2)
-
-# [im_eq, hist_orig, hist_eq] = histogram_equalize(im_orig)
+plt.plot(np.arange(256) ,hist_eq)
+plt.show()
