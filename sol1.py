@@ -57,7 +57,7 @@ def histogram_equalize(im_orig):
         im = yiq[:, :, 0]
 
     # calc the histogram of the image
-    hist_orig, bins = np.histogram(im.flatten(), 255)
+    hist_orig, bins = np.histogram(im.flatten(), 256)
     # compute the cumulative histogram
     cumulative_histogram = np.cumsum(hist_orig)
     # find first m for which S(m) != 0
@@ -69,15 +69,15 @@ def histogram_equalize(im_orig):
         # apply the look up table to the image
         im_eq = np.interp(im.flatten(), bins[:-1], cumulative_stretch).reshape(im.shape)
         #  calc the histogram of the enhanced image
-        hist_eq, bins2 = np.histogram(im_eq, 255)
+        hist_eq, bins2 = np.histogram(im_eq, 256)
     else:
         # apply the look up table to the image
-        yiq[:, :, 0] = np.interp(im.flatten(), np.linspace(0, 1, 255, True), cumulative_stretch).reshape(im.shape) / 255
+        yiq[:, :, 0] = np.interp(im.flatten(), np.linspace(0, 1, 256, True), cumulative_stretch).reshape(im.shape) / 255
         #  ensure the values after the transformation are in the [0,1] range by "clipping"
         im_eq = np.clip(yiq2rgb(yiq), 0, 1)
         #  calc the histogram after the clipping
         # yiq = rgb2yiq(yiq2rgb(im_eq))
-        hist_eq, bins2 = np.histogram(yiq[:, :, 0].flatten(), 255)
+        hist_eq, bins2 = np.histogram(yiq[:, :, 0].flatten(), 256)
 
     return [im_eq, hist_orig, hist_eq]
 

@@ -1,3 +1,4 @@
 Answer to question Q1 in section 3.5:
 
-The reason it will fail is because by finding the next q_i, we devide by zero since the sum over the pixel in some segment is zero
+The reason it will fail is because by finding the next q_i, we devide by zero since the sum over the pixel
+in some segment is zero
