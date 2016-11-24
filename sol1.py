@@ -55,7 +55,6 @@ def histogram_equalize(im_orig):
     hist_orig, bins = np.histogram(im.flatten(), 255)
     # compute the cumulative histogram
     cumulative_histogram = np.cumsum(hist_orig)
-    # cumulative_histogram = cumulative_histogram / cumulative_histogram[-1] * 255
     # find first m for which S(m) != 0
     m_val = (cumulative_histogram[cumulative_histogram > 0])[0]
     # apply linear stretching
@@ -103,6 +102,23 @@ def histogram_equalize2(im_orig):
         im_eq = np.clip(yiq2rgb(imYIQ), 0, 1)
     return im_eq, hist_orig, hist_eq
 
+def quantize (im_orig, n_quant, n_iter):
+    yiq = None
+
+    # check if it is a B&W or color image
+    if(im_orig.ndim == 2):
+        im = im_orig
+    else:
+        # transform to the YIQ space
+        yiq = rgb2yiq(im_orig)
+        im = yiq[:, :, 0]
+
+    if(im_orig.ndim == 2):
+        return
+    else:
+        return
+
+# [im_quant, error] = quantize (im_orig, n_quant, n_iter)
 
 # # imdisplay("/home/itamar/Documents/image_processing/ex1/Files/test files/external/jerusalem.jpg", 2)
 
@@ -116,13 +132,13 @@ im_orig = read_image ("/home/itamar/Documents/image_processing/ex1/Files/test fi
 plt.figure(1)
 plt.subplot(221)
 plt.title("Original Image")
-plt.imshow(im_orig)
-# plt.imshow(im_orig, plt.cm.gray)
+# plt.imshow(im_orig)
+plt.imshow(im_orig, plt.cm.gray)
 
 plt.subplot(222)
 plt.title("Equalized Image")
-plt.imshow(im_eq)
-# plt.imshow(im_eq, plt.cm.gray)
+# plt.imshow(im_eq)
+plt.imshow(im_eq, plt.cm.gray)
 
 plt.subplot(223)
 plt.title("Histograms: Original - Red, Equalized - Blue")
