@@ -55,8 +55,8 @@ def histogram_equalize(im_orig):
     #######################################################
     # Performs histogram equalization on a given image,
     # according to the lecture algorithm.
-    #######################################################
-    isRGB, imYIQ = (len(im_orig.shape) == 3), None
+    ####################################################### 
+   isRGB, imYIQ = (len(im_orig.shape) == 3), None
     if isRGB:
         imYIQ = rgb2yiq(im_orig)
         im_orig = imYIQ[:, :, 0]
