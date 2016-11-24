@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Files/sol1.zip" afterPath="$PROJECT_DIR$/Files/sol1.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/answer_q1.txt" afterPath="$PROJECT_DIR$/answer_q1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sol1.py" afterPath="$PROJECT_DIR$/sol1.py" />
-    </list>
+    <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="" />
     <ignored path="ex1.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -492,7 +487,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480023770201</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Submitted. I needed to fix some stupid issues due to school bureaucracy.... f them">
+      <created>1480024841115</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1480024841115</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -557,7 +559,8 @@
     <MESSAGE value="Finished the color part of task 3.5.  yet to finish the B&amp;W" />
     <MESSAGE value="All done." />
     <MESSAGE value="All done. (with README file etc)" />
-    <option name="LAST_COMMIT_MESSAGE" value="All done. (with README file etc)" />
+    <MESSAGE value="Submitted. I needed to fix some stupid issues due to school bureaucracy.... f them" />
+    <option name="LAST_COMMIT_MESSAGE" value="Submitted. I needed to fix some stupid issues due to school bureaucracy.... f them" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
