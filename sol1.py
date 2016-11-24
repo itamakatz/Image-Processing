@@ -4,16 +4,16 @@ from skimage.color import rgb2gray
 import matplotlib.pyplot as plt
 
 def read_image(filename, representation):
-    im = imread(filename)
 
+    im = imread(filename)
+    # check if it is a B&W image
     if(representation == 1):
         im = rgb2gray(im)
-
-    im_float = im.astype(np.float32)
-    im_float /= 255
-    return im_float
+    # convert to float and normalize
+    return im.astype(np.float32) / 255
 
 def imdisplay(filename, representation):
+    # check if it is a B&W or color image
     if(representation == 1):
         plt.imshow(read_image(filename, representation), plt.cm.gray)
     else:
@@ -21,9 +21,11 @@ def imdisplay(filename, representation):
     plt.show()
 
 def rgb2yiq(imRGB):
-
+    # define the transformation matrix
     trans_mat = np.array([[0.299, 0.587, 0.114], [0.596, -0.275, -0.321], [0.212, -0.523, 0.311]])
+    # make a deep copy of original image
     imYIQ = imRGB.copy()
+    # calc transformation
     for i in range(0, 3):
         imYIQ[:, :, i] = trans_mat[i, 0] * imRGB[:, :, 0] + trans_mat[i, 1] * imRGB[:, :, 1] + \
                          trans_mat[i, 2] * imRGB[:, :,2]
@@ -31,8 +33,11 @@ def rgb2yiq(imRGB):
     return imYIQ
 
 def yiq2rgb(imYIQ):
+    # define the transformation matrix
     trans_mat = np.linalg.inv(np.array([[0.299, 0.587, 0.114], [0.596, -0.275, -0.321], [0.212, -0.523, 0.311]]))
+    # make a deep copy of original image
     imRGB = imYIQ.copy()
+    # calc transformation
     for i in range(0, 3):
         imRGB[:, :, i] = trans_mat[i, 0] * imYIQ[:, :, 0] + trans_mat[i, 1] * imYIQ[:, :, 1] + \
                          trans_mat[i, 2] * imYIQ[:, :,2]
@@ -139,115 +144,33 @@ def quantize (im_orig, n_quant, n_iter):
     # check if it is a B&W or color image
     if(im_orig.ndim == 2):
         # take only relevant values from the lookup table
-        im_quant = np.take(lookup_table, im.astype(np.int32))
+        im_quant = np.take(lookup_table, (im * 255).astype(np.int32))
 
     else:
         # take only relevant values from the lookup table
         yiq[:, :, 0] = np.take(lookup_table, im.astype(np.int32)) / 255
-        # convert back to grb space while demanding all values to be in range [0,1]
+        # convert back to grb space
         im_quant = yiq2rgb(yiq)
 
     return im_quant, err
 
-def quantize2(im_orig, n_quant, n_iter):
-    ########################################################
-    # Performs image quantization on a given image,
-    # n_iter iterations, according to the lecture algorithm.
-    ########################################################
+def quantize_rgb(im_orig, n_quant, n_iter):
 
-    def initialize(hist, nQuant):
-        #######################################################
-        # Initializes the initial division of the histogram
-        #######################################################
-        cdf = np.cumsum(hist)
-        total_pixels = cdf.max()
-        pixels_per_seg = round(total_pixels / nQuant)
-        ZZ = [0]
-        for ii in range(1, nQuant):
-            ZZ.append(np.argmin(cdf < pixels_per_seg * ii))
-        ZZ.append(256)
-        return ZZ
+    #  init vecs and mat
+    im_quantize = np.copy(im_orig)
+    err = np.zeros(n_iter,)
 
-    def calculate_Q(ZZ, hist, nQuant):
-        #######################################################
-        # Calculates the q value in each iteration
-        #######################################################
-        return [np.round(np.average(np.arange(int(ZZ[m]), int(ZZ[m+1])),
-                                    weights=np.take(hist, np.arange(int(ZZ[m]), int(ZZ[m+1])))
-        )) for m in range(nQuant)]
+    # send all 3 color dimensions to quantize()
+    for i in range(3):
+        # normalize for B&W manipulation in quantize()
+        send_im = im_orig[:, :, i] / 255
+        im_quantize[:, :, i], new_err = quantize(send_im, n_quant, n_iter)
+        # save all errors together
+        err += new_err
 
-    def calculate_error(ZZ, QQ, hist):
-        #######################################################
-        # Calculates the error value in each iteration
-        #######################################################
-        indexes = np.digitize(np.linspace(0, 255, 256), ZZ) - 1
-        a = np.array(QQ)[indexes]
-        b = np.arange(0, 256)
-        err = np.square(a - b)
-        return np.dot(err, hist)
+    # find averaged error while leaving the empty values
+    err = err[err > 0] / 3
+    # de-normelize (due to the iter)
+    im_quantize *= 255
 
-    #########################################################################
-
-    isRGB, imYIQ = (len(im_orig.shape) == 3), None
-    #if its color, first change to yiq
-    if isRGB:
-        imYIQ = rgb2yiq(im_orig)
-        im_orig = imYIQ[:, :, 0] * 255
-    else:
-        im_orig *= 255
-
-    hist_orig, bins = np.histogram(im_orig, 256)
-    error, Q, Z = [], [], initialize(hist_orig, n_quant)
-
-    ###  quantization procedure ###
-
-    for i in range(n_iter):
-        prev_iteration_Z = Z
-        prev_iteration_Q = Q
-        Q = calculate_Q(Z, hist_orig, n_quant)
-        Z[0] = 0
-        for k in range(1, len(Z)-1):
-            Z[k] = np.average([Q[k-1], Q[k]])
-        error.append(calculate_error(Z, Q, hist_orig))
-
-        #if already converged, do not proceed to the next iteration
-        if prev_iteration_Z == Z and prev_iteration_Q == Q:
-            break
-
-    #creating lookup table
-    LUT = np.zeros(256)
-    for i in range(n_quant):
-        indexes = np.arange(int(Z[i]), int(Z[i+1]))
-        LUT[indexes] = Q[i]
-    #taking the values along the axis
-    im_quant = np.take(LUT.astype(np.int64), np.clip(im_orig, 0, 255).astype(np.int64))
-    #changing back to color, if needed
-    if isRGB:
-        imYIQ[:, :, 0] = im_quant.astype(np.float32) / 255
-        # without clip, as said in the forum!
-        im_quant = yiq2rgb(imYIQ)
-    return im_quant, error
-
-# im_orig = read_image ("/home/itamar/Documents/image_processing/ex1/Files/test files/external/monkey.jpg", 2)
-# im_orig = read_image ("/home/itamar/Documents/image_processing/ex1/Files/test files/external/jerusalem.jpg", 1)
-im_orig = read_image ("/home/itamar/Documents/image_processing/ex1/Files/test files/external/Low Contrast.jpg", 1)
-
-[im_quantize, error] = quantize (im_orig, 4, 5)
-# [im_quantize, error] = quantize2(im_orig, 4, 5)
-
-plt.figure(1)
-plt.subplot(221)
-plt.title("Original Image")
-# plt.imshow(im_orig)
-plt.imshow(im_orig, plt.cm.gray)
-
-plt.subplot(222)
-plt.title("Equalized Image")
-# plt.imshow(im_quantize)
-plt.imshow(im_quantize, plt.cm.gray)
-
-plt.subplot(223)
-plt.title("Histograms: Original - Red, Equalized - Blue")
-plt.plot(np.arange(len(error)) ,error)
-
-plt.show()
+    return im_quantize, err
