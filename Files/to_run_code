@@ -1,0 +1,23 @@
+# im_orig = read_image ("/home/itamar/Documents/image_processing/ex1/Files/test files/external/monkey.jpg", 1)
+# im_orig = read_image ("/home/itamar/Documents/image_processing/ex1/Files/test files/external/jerusalem.jpg", 1)
+im_orig = read_image ("/home/itamar/Documents/image_processing/ex1/Files/test files/external/Low Contrast.jpg", 1)
+[im_eq, hist_orig, hist_eq] = histogram_equalize(im_orig)
+# [im_quantize, error] = quantize (im_orig, 4, 5)
+# [im_quantize, error] = quantize_rgb (im_orig, 4, 5)
+
+plt.figure(1)
+plt.subplot(221)
+plt.title("Original Image")
+# plt.imshow(im_orig)
+plt.imshow(im_orig, plt.cm.gray)
+
+plt.subplot(222)
+plt.title("Equalized Image")
+# plt.imshow(im_eq)
+plt.imshow(im_eq, plt.cm.gray)
+
+plt.subplot(223)
+plt.title("Histograms: Original - Red, Equalized - Blue")
+plt.plot(np.arange(len(hist_eq)) ,hist_eq, 'r', np.arange(len(hist_orig)) ,hist_orig, 'b')
+
+plt.show()
