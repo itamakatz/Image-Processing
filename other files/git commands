@@ -1,0 +1,75 @@
+﻿
+==
+
+GitHub starting git example:
+
+echo "# ex5" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/itamakatz/ex5.git
+git push -u origin master
+
+==
+
+git config:
+
+	git config --system (set all the users settings)
+	git config --global (set only the current users settings)
+	git config 		(set a single projects settings)
+	git config --list --show-origin (place of all the git config file)
+	git config --global user.name "itamakatz"
+	git config --global user.email "itamakatz@gmail.com"
+	git config --eglobal core.editor "'C:\Program Files\Sublime Text Build 3083 x64/subl.exe' -w"
+	git config --global color.ui true (enable colored text in git bash)
+	git config core.autocrlf true (turn off the end of line conversion)
+		Set as follows:
+		git config --global core.autocrlf true (for windows)
+		git config --global core.autocrlf input (for linux)
+		git config --global core.autocrlf false (windows in a Windows-only project)
+
+==
+
+general commands:
+	git init (initialize a repository. Has to be in the root of the project)
+	git clone https://github.com/itamakatz/ex4 origin
+	git add . (add all changes of the current directory)
+	git commit -m "<Message>" (commit the added changes to the repository. can enter note)
+	git fetch (fetch repository from server)
+	git merge origin/master (merge the master branch with with the origin/master one)
+	git reset --hard (reset the latest changes in your work to be able to merege)
+
+==
+
+git log:
+	git log (see a list with all the commits made showing the date and the message)
+	git log -n x (limit the number of commits to 'x')
+	git log --since=2015-02-01 (limit the list of commits from the given date on)
+	git log --until=2015-02-01 (same but until the given date)
+	git log --author="<name>" (limit the list of commits from a specific author)
+	git log --grep="<reg_word>" (limit the list of commits to those matching the regex)
+==
+
+git remote:
+	git remote (see set remote servers)
+	git remote -v (see set remote servers with more detail)
+	git remote rm <name of server> (remove an existing remote server)
+
+	git remote add <name of server> <url> (set a remote server)
+	git push -u <name of server> master ()
+
+==
+
+git status (see which files changed)
+
+==
+
+git diff (compare two files)
+
+==
+
+git stash:
+	git stash (stash your work to merge)
+	git stash pop (pop your stashed work after merge)
+
+==

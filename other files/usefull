@@ -1,0 +1,57 @@
+
+Compile: (-g for dibugging mode):
+g++ -Wall -std=c++11 -g test.cpp -o test
+
+Mount other partition:
+sudo mkdir /media/itamar/sda2
+sudo mount -o ro /dev/sda2 /media/itamar/sda2
+
+Unmount fuse program:
+fusermount -uz mt
+
+To attach external process in GDB:
+echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+
+Read 1 line:
+awk 'NR == 10{print}' ./Block.cpp
+
+See processes sorted by time:
+ps kstart_time -ef -A
+
+Get PID of process by its name
+pidof <NAME>
+
+Use strace on PID with debugger on: 
+strace -d -p <PID>
+
+See all running TCP and UDP on the system
+netstat -tulpn
+
+Connect to Huji servers(using totp and regular CS password):
+ssh -XC itamakatz%river@gw.cs.huji.ac.il
+
+Get IP address: (first one better)
+ip address
+OR
+/sbin/ifconfig
+
+Write exit to stdin of PID
+echo exit > /proc/<PID>/fd/0
+
+PROGRAM gets COMMANDS as input
+./PROGRAM < ./COMMANDS
+
+Linux: Most recent file in a directory:
+ls -Art | tail -n 1
+
+Specification of the CPU:
+cat /proc/cpuinfo
+
+See text file in the shell:
+cat <FILE>
+
+See all files in dir
+ls -la = la
+
+System call to execute another program
+int execve(const char *filename, char *const argv[], char *const envp[]);
