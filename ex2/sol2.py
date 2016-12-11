@@ -1,6 +1,5 @@
 import numpy as np
 from scipy.misc import imread as imread
-# from scipy.signal import convolve2d
 from scipy.signal import convolve2d
 import scipy.special
 from skimage.color import rgb2gray
@@ -15,7 +14,8 @@ def General_DFT(x, mult):
 
     # compute vander matrix
     vander = np.vander((np.exp(mult * 2 * np.pi * 1j * np.arange(x.shape[0]) / x.shape[0])), increasing=True)
-    return np.around(vander.dot(x), NUMERIC_ERROR)
+    # return vander.dot(x)
+    return vander.dot(x)
 
 def General_DFT2(x, mult):
     # x - array to transform
@@ -31,7 +31,7 @@ def DFT(signal):
     return General_DFT(signal, -1)
 
 def IDFT(fourier_signal):
-    return (General_DFT(fourier_signal, 1)) / fourier_signal.shape[0]
+    return np.around(General_DFT(fourier_signal, 1), NUMERIC_ERROR) / fourier_signal.shape[0]
 
 
 def DFT2(image):
@@ -71,33 +71,58 @@ def blur_fourier (im, kernel_size):
     center = (np.floor(im.shape[0] / 2), np.floor(im.shape[1] / 2))
     ker_f[np.arange(center[0] - kernel_size,  center[0] + kernel_size), \
           np.arange(center[1] - kernel_size,  center[1] + kernel_size)] = ker
+    ker_f = np.fft.ifftshift(ker_f)
     ker_f = DFT2(np.copy(ker))
     im_f = DFT2(im)
     return IDFT2(im_f * ker_f)
 
-im = 0
-kernel_size = 3
+def read_image(filename, representation):
 
-blur_im = blur_spatial (im, kernel_size)
-blur_im2 = blur_fourier (im, kernel_size)
+    im = imread(filename)
+    # check if it is a B&W image
+    if(representation == 1):
+        im = rgb2gray(im)
+    # convert to float and normalize
+    return im.astype(np.float32)
 
-magnitude = fourier_der(im)
-magnitude2 = conv_der(im)
+def imdisplay(filename, representation):
+    # check if it is a B&W or color image
+    if(representation == 1):
+        plt.imshow(read_image(filename, representation), plt.cm.gray)
+    else:
+        plt.imshow(read_image(filename, representation))
+    plt.show()
 
-A = np.arange(6)
-A = A[np.newaxis,:]
-z = np.zeros((6,6)) + A
 
-trans_signal = IDFT(A)
 
-# print(trans_signal.shape)
-# print(trans_signal)
 
-new_trans_signal = IDFT(z[np.arange(6),:])
 
-# print(new_trans_signal.shape)
-# print(new_trans_signal)
 
-print(trans_signal)
-print(new_trans_signal[1,:])
-print(new_trans_signal[:,1])
+
+# ========== Check DFT2 / IDFT2 ================
+# im = read_image("/home/itamar/Documents/ip/ex2/files/presummition test/external/monkey.jpg", 1)
+#
+# x = DFT2(im)
+# y = np.fft.fft2(im)
+#
+# plt.figure(1)
+#
+# plt.subplot(211)
+# plt.imshow(abs(IDFT2(x)), plt.cm.gray)
+# plt.subplot(212)
+# plt.imshow(abs(np.fft.ifft2(y)), plt.cm.gray)
+# # plt.subplot(211)
+# # plt.imshow(np.log(1 + np.abs(np.fft.ifftshift(x))), plt.cm.gray)
+# # plt.subplot(212)
+# # plt.imshow(np.log(1 + np.abs(np.fft.ifftshift(y))), plt.cm.gray)
+#
+# plt.show()
+
+
+# ========== Check DFT / IDFT ================
+# n = 10000
+# sig = np.random.rand(10,1)
+# x = IDFT(sig)
+# y = np.fft.ifft(np.matrix.transpose(sig))
+# dif = x[:,0] - y[0,:]
+# print(np.sum(np.around(dif, NUMERIC_ERROR)))
