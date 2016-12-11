@@ -51,15 +51,10 @@
       <file leaf-file-name="sol2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ex2/sol2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="94" column="31" lean-forward="false" selection-start-line="94" selection-start-column="31" selection-end-line="94" selection-end-column="31" />
+            <state relative-caret-position="76">
+              <caret line="4" column="33" lean-forward="false" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#234#258#0" expanded="false" />
-                <element signature="e#578#602#0" expanded="false" />
-                <element signature="e#1075#1105#0" expanded="false" />
-                <element signature="e#1137#1226#0" expanded="false" />
-                <element signature="e#1250#1280#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -705,7 +700,14 @@
       <option name="project" value="LOCAL" />
       <updated>1481491530355</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Done debugging :)">
+      <created>1481492351606</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1481492351606</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TodoView">
@@ -777,7 +779,8 @@
     <MESSAGE value="Done with first try of code.  Now need to debug" />
     <MESSAGE value="Done checking DFT / IDFT and DFT2 / IDFT2" />
     <MESSAGE value="Finished  checking all the code but the last 3.2 part" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished  checking all the code but the last 3.2 part" />
+    <MESSAGE value="Done debugging :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done debugging :)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -788,7 +791,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="114" />
+      <option name="time" value="115" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -809,11 +812,6 @@
           <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#234#258#0" expanded="false" />
-            <element signature="e#578#602#0" expanded="false" />
-            <element signature="e#1075#1105#0" expanded="false" />
-            <element signature="e#1137#1226#0" expanded="false" />
-            <element signature="e#1250#1280#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -841,11 +839,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#234#258#0" expanded="false" />
-            <element signature="e#578#602#0" expanded="false" />
-            <element signature="e#1075#1105#0" expanded="false" />
-            <element signature="e#1137#1226#0" expanded="false" />
-            <element signature="e#1250#1280#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -873,11 +866,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#234#258#0" expanded="false" />
-            <element signature="e#578#602#0" expanded="false" />
-            <element signature="e#1075#1105#0" expanded="false" />
-            <element signature="e#1137#1226#0" expanded="false" />
-            <element signature="e#1250#1280#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -905,11 +893,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#234#258#0" expanded="false" />
-            <element signature="e#578#602#0" expanded="false" />
-            <element signature="e#1075#1105#0" expanded="false" />
-            <element signature="e#1137#1226#0" expanded="false" />
-            <element signature="e#1250#1280#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1019,15 +1002,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ex2/sol2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="94" column="31" lean-forward="false" selection-start-line="94" selection-start-column="31" selection-end-line="94" selection-end-column="31" />
+        <state relative-caret-position="76">
+          <caret line="4" column="33" lean-forward="false" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#234#258#0" expanded="false" />
-            <element signature="e#578#602#0" expanded="false" />
-            <element signature="e#1075#1105#0" expanded="false" />
-            <element signature="e#1137#1226#0" expanded="false" />
-            <element signature="e#1250#1280#0" expanded="false" />
           </folding>
         </state>
       </provider>
