@@ -49,13 +49,14 @@ def conv_der(im):
 
 def fourier_der(im):
 
-    vander_M = np.vander((np.exp(-1 * 2 * np.pi * 1j * np.arange(im.shape[0]) / im.shape[0])), increasing=True)
-    xDer =  np.around(vander_M.dot(np.arange(im.shape[0]) * im), NUMERIC_ERROR)
+    #calculating the derivatives
+    u, v = np.meshgrid(np.arange(-im.shape[1] / 2, im.shape[1] / 2 - 1 * im.shape[1] % 2),
+                       np.arange(-im.shape[0] / 2, im.shape[0] / 2 - 1 * im.shape[0] % 2))
 
-    vander_N = np.vander((np.exp(-1 * 2 * np.pi * 1j * np.arange(im.shape[1]) / im.shape[1])), increasing=True)
-    yDer =  np.around((np.arange(im.shape[1]) * im).dot(vander_N), NUMERIC_ERROR)
-
-    return np.sqrt(np.abs(xDer) ** 2 + np.abs(yDer) ** 2)
+    # no need to normalize since using func General_DFT2
+    xDer = 2 * np.pi * 1j * General_DFT2(u * np.fft.fftshift(General_DFT2(im, -1)), 1)
+    yDer = 2 * np.pi * 1j * General_DFT2(v * np.fft.fftshift(General_DFT2(im, -1)), 1)
+    return np.sqrt(np.abs(xDer) ** 2 + np.abs(yDer)**2)
 
 def create_ker(kernel_size):
     bin = scipy.special.binom(kernel_size - 1, np.arange(kernel_size)).astype(np.int64)
@@ -68,9 +69,16 @@ def blur_spatial (im, kernel_size):
 def blur_fourier (im, kernel_size):
     ker = create_ker(kernel_size)
     ker_f = im * 0
-    center = (np.floor(im.shape[0] / 2), np.floor(im.shape[1] / 2))
-    ker_f[np.arange(center[0] - kernel_size,  center[0] + kernel_size), \
-          np.arange(center[1] - kernel_size,  center[1] + kernel_size)] = ker
+    center = (int(np.floor(im.shape[0] / 2)), int(np.floor(im.shape[1] / 2)))
+
+    a = np.arange(center[0] - int((kernel_size - 1) / 2),  center[0] + int((kernel_size - 1) / 2))
+    b = np.arange(center[1] - int((kernel_size - 1) / 2),  center[1] + int((kernel_size - 1) / 2))
+    c = ker_f[a,b]
+
+    #
+    # ker_f[np.arange(center[0] - int((kernel_size - 1) / 2),  center[0] + int((kernel_size - 1) / 2)),
+    #       np.arange(center[1] - int((kernel_size - 1) / 2),  center[1] + int((kernel_size - 1) / 2))] = ker
+
     ker_f = np.fft.ifftshift(ker_f)
     ker_f = DFT2(np.copy(ker))
     im_f = DFT2(im)
@@ -85,19 +93,38 @@ def read_image(filename, representation):
     # convert to float and normalize
     return im.astype(np.float32)
 
-def imdisplay(filename, representation):
-    # check if it is a B&W or color image
-    if(representation == 1):
-        plt.imshow(read_image(filename, representation), plt.cm.gray)
-    else:
-        plt.imshow(read_image(filename, representation))
-    plt.show()
+
+#
+
+im = read_image("/home/itamar/Documents/ip/ex2/files/presummition test/external/monkey.jpg", 1)
+
+conv_der_im = blur_spatial(im, 5)
+fourier_der_im = blur_fourier(im, 5)
+
+plt.figure(1)
+
+plt.subplot(211)
+plt.imshow(conv_der_im, plt.cm.gray)
+plt.subplot(212)
+plt.imshow(fourier_der_im, plt.cm.gray)
+
+plt.show()
 
 
-
-
-
-
+# ========== Check conv_der / fourier_der ================
+# im = read_image("/home/itamar/Documents/ip/ex2/files/presummition test/external/monkey.jpg", 1)
+#
+# conv_der_im = conv_der(im)
+# fourier_der_im = fourier_der(im)
+#
+# plt.figure(1)
+#
+# plt.subplot(211)
+# plt.imshow(conv_der_im, plt.cm.gray)
+# plt.subplot(212)
+# plt.imshow(fourier_der_im, plt.cm.gray)
+#
+# plt.show()
 
 # ========== Check DFT2 / IDFT2 ================
 # im = read_image("/home/itamar/Documents/ip/ex2/files/presummition test/external/monkey.jpg", 1)
