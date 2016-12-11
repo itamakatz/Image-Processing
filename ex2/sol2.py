@@ -69,20 +69,17 @@ def blur_spatial (im, kernel_size):
 def blur_fourier (im, kernel_size):
     ker = create_ker(kernel_size)
     ker_f = im * 0
+
     center = (int(np.floor(im.shape[0] / 2)), int(np.floor(im.shape[1] / 2)))
 
-    a = np.arange(center[0] - int((kernel_size - 1) / 2),  center[0] + int((kernel_size - 1) / 2))
-    b = np.arange(center[1] - int((kernel_size - 1) / 2),  center[1] + int((kernel_size - 1) / 2))
-    c = ker_f[a,b]
-
-    #
-    # ker_f[np.arange(center[0] - int((kernel_size - 1) / 2),  center[0] + int((kernel_size - 1) / 2)),
-    #       np.arange(center[1] - int((kernel_size - 1) / 2),  center[1] + int((kernel_size - 1) / 2))] = ker
+    ker_f[np.meshgrid(
+        np.arange(center[0] - int((kernel_size - 1) / 2), center[0] + int((kernel_size - 1) / 2) + 1),
+        np.arange(center[1] - int((kernel_size - 1) / 2), center[1] + int((kernel_size - 1) / 2) + 1))] = ker
 
     ker_f = np.fft.ifftshift(ker_f)
-    ker_f = DFT2(np.copy(ker))
+    ker_f = DFT2(np.copy(ker_f))
     im_f = DFT2(im)
-    return IDFT2(im_f * ker_f)
+    return (abs(IDFT2(im_f * ker_f))).astype(np.float32)
 
 def read_image(filename, representation):
 
@@ -94,21 +91,21 @@ def read_image(filename, representation):
     return im.astype(np.float32)
 
 
+
+# ========== Check blur_spatial / blur_fourier ================
+# im = read_image("/home/itamar/Documents/ip/ex2/files/presummition test/external/monkey.jpg", 1)
 #
-
-im = read_image("/home/itamar/Documents/ip/ex2/files/presummition test/external/monkey.jpg", 1)
-
-conv_der_im = blur_spatial(im, 5)
-fourier_der_im = blur_fourier(im, 5)
-
-plt.figure(1)
-
-plt.subplot(211)
-plt.imshow(conv_der_im, plt.cm.gray)
-plt.subplot(212)
-plt.imshow(fourier_der_im, plt.cm.gray)
-
-plt.show()
+# conv_der_im = blur_spatial(im, 5)
+# fourier_der_im = blur_fourier(im, 5)
+#
+# plt.figure(1)
+#
+# plt.subplot(211)
+# plt.imshow(conv_der_im, plt.cm.gray)
+# plt.subplot(212)
+# plt.imshow(fourier_der_im, plt.cm.gray)
+#
+# plt.show()
 
 
 # ========== Check conv_der / fourier_der ================
