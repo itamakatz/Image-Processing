@@ -154,18 +154,3 @@ def blur_fourier(im, kernel_size):
     return blur_im.astype(np.float32)
 
 #----------------------------end------------------------------#
-
-
-im = read_image("/home/itamar/Documents/ip/ex2/files/presummition test/external/monkey.jpg", 1)
-
-conv_der_im = conv_der(im)
-fourier_der_im = fourier_der(im)
-
-plt.figure(1)
-
-plt.subplot(211)
-plt.imshow(conv_der_im, plt.cm.gray)
-plt.subplot(212)
-plt.imshow(fourier_der_im, plt.cm.gray)
-
-plt.show()

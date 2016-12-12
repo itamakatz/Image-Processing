@@ -2,7 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex1/README" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex1/answer_q1.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/ex2_jupyter.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/files/presummition test/external/monkey.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/files/sol_liav/README" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/files/sol_liav/answer_q1.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/files/sol_liav/answer_q2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/files/sol_liav/answer_q3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/files/sol_liav/ex2.zip" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex2/files/sol2_for_testing.py" afterPath="$PROJECT_DIR$/ex2/files/sol2_for_testing.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex2/files/sol_liav/sol2_liav.py" afterPath="$PROJECT_DIR$/ex2/files/sol_liav/sol2_liav.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex2/sol2.py" afterPath="$PROJECT_DIR$/ex2/sol2.py" />
     </list>
     <ignored path="ex1.iws" />
@@ -18,6 +29,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/ip$sol2.coverage" NAME="sol2 Coverage Results" MODIFIED="1481492279145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ex2/" />
     <SUITE FILE_PATH="coverage/ex1$sol1.coverage" NAME="sol1 Coverage Results" MODIFIED="1480022832473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ip$sol2_for_testing.coverage" NAME="sol2_for_testing Coverage Results" MODIFIED="1481495618814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ex2/files/" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -39,8 +51,8 @@
       <file leaf-file-name="sol1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ex1/sol1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+            <state relative-caret-position="133">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="12" selection-end-column="38" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -51,8 +63,8 @@
       <file leaf-file-name="sol2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ex2/sol2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="33" lean-forward="false" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+            <state relative-caret-position="95">
+              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -63,20 +75,11 @@
       <file leaf-file-name="sol2_liav.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ex2/files/sol_liav/sol2_liav.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2109">
-              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="87">
+              <caret line="110" column="17" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="155" selection-end-column="63" />
               <folding>
                 <element signature="e#201#219#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ex2_jupyter.ipynb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ex2/ex2_jupyter.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="10" />
             </state>
           </provider>
         </entry>
@@ -94,6 +97,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>32</find>
+      <find>create_gauss_kernel</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -108,6 +112,8 @@
       <list>
         <option value="$PROJECT_DIR$/sol1.py" />
         <option value="$PROJECT_DIR$/ex2/ex2_jupyter.ipynb" />
+        <option value="$PROJECT_DIR$/ex2/files/ex2_jupyter.ipynb" />
+        <option value="$PROJECT_DIR$/ex2/files/sol2_for_testing.py" />
         <option value="$PROJECT_DIR$/ex2/files/sol_liav/sol2_liav.py" />
         <option value="$PROJECT_DIR$/ex2/sol2.py" />
       </list>
@@ -239,7 +245,7 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/sol1.py" />
     <property name="js.eslint.eslintPackage" value="" />
   </component>
-  <component name="RunManager" selected="Python.sol2">
+  <component name="RunManager" selected="Python.sol2_for_testing">
     <configuration default="false" name="sol1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -513,6 +519,24 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
+    <configuration default="false" name="sol2_for_testing" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ex2/files/" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="ip" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ex2/files/sol2_for_testing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
     <configuration default="false" name="sol2" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -531,10 +555,11 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Python.sol2_liav" />
-      <item index="1" class="java.lang.String" itemvalue="Python.sol2" />
-      <item index="2" class="java.lang.String" itemvalue="Python.sol1" />
+      <item index="1" class="java.lang.String" itemvalue="Python.sol2_for_testing" />
+      <item index="2" class="java.lang.String" itemvalue="Python.sol2" />
+      <item index="3" class="java.lang.String" itemvalue="Python.sol1" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -707,7 +732,14 @@
       <option name="project" value="LOCAL" />
       <updated>1481492351606</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Done with comments">
+      <created>1481492917396</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1481492917396</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TodoView">
@@ -723,13 +755,13 @@
     <frame x="-1" y="-1" width="1922" height="1182" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18550107" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18550107" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987747" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987747" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987747" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987747" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30065975" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30065975" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987747" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -780,7 +812,8 @@
     <MESSAGE value="Done checking DFT / IDFT and DFT2 / IDFT2" />
     <MESSAGE value="Finished  checking all the code but the last 3.2 part" />
     <MESSAGE value="Done debugging :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done debugging :)" />
+    <MESSAGE value="Done with comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done with comments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -973,16 +1006,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sol1.py" />
-    <entry file="file://$PROJECT_DIR$/ex1/sol1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ex2/ex2_jupyter.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -990,20 +1013,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ex2/files/ex2_jupyter.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex2/files/sol2_for_testing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1387">
+          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ex2/files/sol_liav/sol2_liav.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2109">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="87">
+          <caret line="110" column="17" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="155" selection-end-column="63" />
           <folding>
             <element signature="e#201#219#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ex1/sol1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="12" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ex2/sol2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="33" lean-forward="false" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+        <state relative-caret-position="95">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
