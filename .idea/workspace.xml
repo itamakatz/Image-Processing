@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex3/files/ex3_jupyter.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex3/files/ex3_jupyter.ipynb" afterPath="$PROJECT_DIR$/ex3/files/ex3_jupyter.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex3/submition/sol3.py" afterPath="$PROJECT_DIR$/ex3/submition/sol3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/other files/first_jupyter.ipynb" afterPath="$PROJECT_DIR$/other files/first_jupyter.ipynb" />
     </list>
     <ignored path="ex1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,8 +65,8 @@
       <file leaf-file-name="sol3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ex3/submition/sol3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="50" column="25" lean-forward="true" selection-start-line="50" selection-start-column="25" selection-end-line="50" selection-end-column="25" />
+            <state relative-caret-position="589">
+              <caret line="71" column="13" lean-forward="false" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#225#500#0" expanded="false" />
@@ -81,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/ex3/files/ex3_jupyter.ipynb">
           <provider selected="true" editor-type-id="ipnb-editor">
             <state>
-              <selected id="6" />
+              <selected id="7" />
             </state>
           </provider>
         </entry>
@@ -119,8 +118,8 @@
         <option value="$PROJECT_DIR$/ex2/files/sol2_for_testing.py" />
         <option value="$PROJECT_DIR$/ex2/files/sol_liav/sol2_liav.py" />
         <option value="$PROJECT_DIR$/ex2/sol2.py" />
-        <option value="$PROJECT_DIR$/ex3/submition/sol3.py" />
         <option value="$PROJECT_DIR$/ex3/files/ex3_jupyter.ipynb" />
+        <option value="$PROJECT_DIR$/ex3/submition/sol3.py" />
       </list>
     </option>
   </component>
@@ -786,7 +785,14 @@
       <option name="project" value="LOCAL" />
       <updated>1482481391926</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Finished first 3.1 code, and added a jupyter file">
+      <created>1482485735323</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1482485735323</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TodoView">
@@ -837,7 +843,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Created sol1.py" />
     <MESSAGE value="Added useful numpy essential commands" />
     <MESSAGE value="Added a setting file for PyCharm in the Files dir" />
     <MESSAGE value="Finished task 3.1" />
@@ -862,7 +867,8 @@
     <MESSAGE value="Done with comments" />
     <MESSAGE value="Uploaded the ex2.zip file" />
     <MESSAGE value="Created code skeleton with all needed functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created code skeleton with all needed functions" />
+    <MESSAGE value="Finished first 3.1 code, and added a jupyter file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished first 3.1 code, and added a jupyter file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1065,14 +1071,14 @@
     <entry file="file://$PROJECT_DIR$/ex3/files/ex3_jupyter.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
-          <selected id="6" />
+          <selected id="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ex3/submition/sol3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="50" column="25" lean-forward="true" selection-start-line="50" selection-start-column="25" selection-end-line="50" selection-end-column="25" />
+        <state relative-caret-position="589">
+          <caret line="71" column="13" lean-forward="false" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#225#500#0" expanded="false" />

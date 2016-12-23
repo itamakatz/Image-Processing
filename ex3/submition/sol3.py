@@ -46,16 +46,30 @@ def build_gaussian_pyramid(im, max_levels, filter_size):
     pyr[np.min([max_levels, np.log2(im.shape[0]) - 4, np.log2(im.shape[1]) - 4])] = 0
 
     for i in range(len(pyr)):
-        tmp = scipy.ndimage.filters.convolve(im, filter_vec, output = None, mode = 'mirror')
-        tmp = scipy.ndimage.filters.convolve(tmp.transpose(), filter_vec, output=None, mode='mirror')
-        pyr[i] = tmp[::2]
+        im = scipy.ndimage.filters.convolve(im, filter_vec, output = None, mode = 'mirror')
+        im = scipy.ndimage.filters.convolve(im.transpose(), filter_vec, output = None, mode = 'mirror')
+        pyr[i] = im[::2]
 
-    return
+    return pyr
 
 def build_laplacian_pyramid(im, max_levels, filter_size):
-    return
+    filter_vec = create_filter_vec(filter_size) * 2
+    gauss_pyr = build_gaussian_pyramid(im, max_levels + 1, filter_size)
+
+    pyr[len(gauss_pyr) - 1] = 0
+
+    for i in range(len(pyr)):
+        tmp = np.zeros(gauss_pyr[i].shape[0], gauss_pyr[i].shape[1])
+        tmp[::2,::2] = gauss_pyr[i + 1]
+        tmp = scipy.ndimage.filters.convolve(tmp, filter_vec, output = None, mode = 'mirror')
+        tmp = scipy.ndimage.filters.convolve(tmp.transpose(), filter_vec, output = None, mode = 'mirror')
+        pyr[i] = gauss_pyr[i] - tmp
+
+    return pyr
 
 def laplacian_to_image(lpyr, filter_vec, coeff):
+    lpyr *= coeff
+    img = sum
     return
 
 def render_pyramid(pyr, levels):
