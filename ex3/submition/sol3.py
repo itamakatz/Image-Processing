@@ -5,6 +5,7 @@ import os
 
 import scipy.special
 from scipy.signal import convolve2d
+from scipy import ndimage
 
 def read_image(filename, representation):
     # filename - file to open as image
@@ -20,7 +21,35 @@ def read_image(filename, representation):
 def relpath(filename):
     return os.path.join(os.path.dirname(__file__), filename)
 
+###########################################################################################################################3
+def create_filter_vec(filter_size):
+
+    conv_ker =  np.array([[1, 1]])
+    filter = conv_ker
+
+    #  using a O(logN) to compute the filter
+    log2 = np.log2(filter_size)
+    whole = np.floor(log2).astype(np.int64)
+    rest = (filter_size - whole).astype(np.int64)
+
+    for i in range(whole):
+        filter = convolve2d(filter, filter).astype(np.float32)
+    for i in range(2**rest):
+        filter = convolve2d(conv_ker, filter).astype(np.float32)
+
+    # normalize
+    return filter / np.sum(filter)
+
 def build_gaussian_pyramid(im, max_levels, filter_size):
+    filter_vec = create_filter_vec(filter_size)
+
+    pyr[np.min([max_levels, np.log2(im.shape[0]) - 4, np.log2(im.shape[1]) - 4])] = 0
+
+    for i in range(len(pyr)):
+        tmp = scipy.ndimage.filters.convolve(im, filter_vec, output = None, mode = 'mirror')
+        tmp = scipy.ndimage.filters.convolve(tmp.transpose(), filter_vec, output=None, mode='mirror')
+        pyr[i] = tmp[::2]
+
     return
 
 def build_laplacian_pyramid(im, max_levels, filter_size):
