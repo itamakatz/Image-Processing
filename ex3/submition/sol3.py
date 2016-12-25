@@ -82,8 +82,8 @@ def build_gaussian_pyramid(im, max_levels, filter_size):
 
 def expand(filter_vec, im):
     # method that helps calculate an expanded image given an image and a kernel array
-    # im - image to expand
     # filter_vec - kernel used to build the gaussian pyramid
+    # im - image to expand
     # return - the expanded image after interpolation
 
     expand = np.zeros([im.shape[0] * 2, im.shape[1] * 2], dtype=np.float32)
@@ -98,79 +98,94 @@ def build_laplacian_pyramid(im, max_levels, filter_size):
     filter_vec *= 2 #  on expansion the kernel should not be completely normalized
     pyr = [0] * len(gauss_pyr) # create the entire array for better complexity
 
-    # using functional programing to avoid for loops
+    # using functional programing to avoid a for loop
     pyr[:-1] = np.ndarray.tolist(np.array(gauss_pyr[:-1]) -  \
                                  np.array(list(map(functools.partial(expand, filter_vec), gauss_pyr[1:]))))
-
-    # for i in range(len(pyr) - 1):
-    #     pyr[i] = (gauss_pyr[i] - expand(filter_vec, gauss_pyr[i + 1])).astype(np.float32)
 
     pyr[-1] = gauss_pyr[-1]
     return pyr, filter_vec
 
 def laplacian_to_image(lpyr, filter_vec, coeff):
     im = np.array([[0]]).astype(np.float32)
-
-    vfunc = functools.partial(expand, filter_vec)
-    pyr[:-1] = np.ndarray.tolist(np.array(gauss_pyr[:-1]) - np.array(list(map(vfunc, gauss_pyr[1:]))))
-
+    # add leyers and expand for next iteration
     for i  in range(len(lpyr) - 1):
         im = expand(filter_vec, im + lpyr[-(i + 1)] * coeff[-(i + 1)])
 
+    # mult by the coefficient
     return (im + lpyr[0] * coeff[0]).astype(np.float32)
 
 def render_pyramid(pyr, levels):
+    # calc the length of the returned matrix by the geometric progression
     length = (pyr[0].shape[1] * 2 * (1 - 2**(-levels)))
 
+    # return the empty matrix
     return np.zeros([pyr[0].shape[0], int(length)], dtype=np.float32)
 
 def display_pyramid(pyr, levels):
     res = render_pyramid(pyr, levels)
     length = 0
+    # find location of each layer in the res matrix
     for i in range(levels):
-        a = pyr[i].shape[0]
-        b = pyr[i].shape[1] + length
-        res[0 : a, length : b] = pyr[i]
+        res[0 : pyr[i].shape[0], length : pyr[i].shape[1] + length] = pyr[i]
         length += pyr[i].shape[1]
+    # plot the resulting matrix
     plt.figure(index())
     plt.imshow(np.clip(res, 0, 1), plt.cm.gray)
     return
 
 def pyramid_blending(im1, im2, mask, max_levels, filter_size_im, filter_size_mask):
+    # calc L1,L2, G1
     im1_lpyr, filter_vec = build_laplacian_pyramid(im1, max_levels, filter_size_im)
     im2_lpyr, _ = build_laplacian_pyramid(im2, max_levels, filter_size_im)
     mask_gpyr, _ = build_gaussian_pyramid(mask.astype(np.float32), max_levels, filter_size_mask)
-
+    # calc L_out
     out_pyrl = (np.array(mask_gpyr) * np.array(im1_lpyr)) + (1 - np.array(mask_gpyr)) * np.array(im2_lpyr)
 
+    # clip to truncate the laplacian negative values
     return np.clip(laplacian_to_image(out_pyrl, filter_vec, np.ones(len(im1_lpyr))), 0, 1)
 
+def sub_plot(im, arg, color):
+    # faster way to plot many images in one figure
+    # im - im to plot
+    # arg - argument for subplot
+    # color - boolean if it is a color image or not.
+
+    plt.subplot(arg)
+    plt.imshow(im) if color else plt.imshow(im, plt.cm.gray)
+    return
 
 def examples(path_1, path_2, mask_path, max_levels, filter_size_im, filter_size_mask):
+    # general function to plot blending examples
+    # path_1 - relative path to first image
+    # path_2 - relative path to second image
+    # mask_path - relative path to the mask image
+    # max_levels - number of layers in the pyramid
+    # filter_size_im - size of im1, im2 filter
+    # filter_size_mask - size of the mask filter
+    # returns - [im1, im2, mask, im_blend] - the opened images and the resulting blend
+
     im1 = read_image(relpath(path_1), 2)
     im2 = read_image(relpath(path_2), 2)
+    # mult by 255 to revert the normalization so the mask is binary
     mask = read_image(relpath(mask_path), 1) * 255
 
+    # calc all the RGB axis
     im_blend = im1 * 0
+    im_blend[:,:,0] = pyramid_blending(im1[:,:,0], im2[:,:,0], mask, max_levels, filter_size_im, filter_size_mask)
+    im_blend[:,:,1] = pyramid_blending(im1[:,:,1], im2[:,:,1], mask, max_levels, filter_size_im, filter_size_mask)
+    im_blend[:,:,2] = pyramid_blending(im1[:,:,2], im2[:,:,2], mask, max_levels, filter_size_im, filter_size_mask)
 
-    for i in range(3):
-        im_blend[:,:,i] += pyramid_blending(im1[:,:,i], im2[:,:,i], mask, max_levels, filter_size_im, filter_size_mask)
-
+    # plot results
     plt.figure(index())
 
-    plt.subplot(221)
-    plt.imshow(im1)
-    plt.subplot(222)
-    plt.imshow(im2)
-    plt.subplot(223)
-    plt.imshow(mask, plt.cm.gray)
-    plt.subplot(224)
-    plt.imshow(im_blend)
+    sub_plot(im1, 221, True)
+    sub_plot(im2, 222, True)
+    sub_plot(mask, 223, False)
+    sub_plot(im_blend, 224, True)
 
     plt.show()
 
     return im1, im2, mask, im_blend
-
 
 def blending_example1():
     return examples('race2.jpg', 'givat2.jpg', 'mask2.jpg', 6, 1, 3)
@@ -182,6 +197,3 @@ def blending_example2():
 
 im1, im2, mask, im_blend = blending_example1()
 # im1, im2, mask, im_blend = blending_example2()
-
-
-

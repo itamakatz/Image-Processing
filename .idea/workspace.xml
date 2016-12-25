@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/itamar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex3/files/ex3_jupyter.ipynb" afterPath="$PROJECT_DIR$/ex3/files/ex3_jupyter.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex3/files/liav_submition/sol3.py" afterPath="$PROJECT_DIR$/ex3/files/liav_submition/sol3.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex3/submition/sol3.py" afterPath="$PROJECT_DIR$/ex3/submition/sol3.py" />
     </list>
     <ignored path="ex1.iws" />
@@ -21,7 +20,7 @@
     <SUITE FILE_PATH="coverage/ip$sol3_liav.coverage" NAME="sol3_liav Coverage Results" MODIFIED="1482692705361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ex3/files/liav_submition/" />
     <SUITE FILE_PATH="coverage/ip$sol2.coverage" NAME="sol2 Coverage Results" MODIFIED="1481492279145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ex2/" />
     <SUITE FILE_PATH="coverage/ex1$sol1.coverage" NAME="sol1 Coverage Results" MODIFIED="1480022832473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ip$sol3.coverage" NAME="sol3 Coverage Results" MODIFIED="1482693458190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ex3/submition" />
+    <SUITE FILE_PATH="coverage/ip$sol3.coverage" NAME="sol3 Coverage Results" MODIFIED="1482694140219" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ex3/submition" />
     <SUITE FILE_PATH="coverage/ip$sol2_for_testing.coverage" NAME="sol2_for_testing Coverage Results" MODIFIED="1481495618814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ex2/files/" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -44,14 +43,17 @@
       <file leaf-file-name="sol3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ex3/submition/sol3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="105" selection-end-column="91" />
+            <state relative-caret-position="524">
+              <caret line="198" column="48" lean-forward="false" selection-start-line="198" selection-start-column="48" selection-end-line="198" selection-end-column="48" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#292#464#0" expanded="false" />
                 <element signature="e#512#789#0" expanded="false" />
                 <element signature="e#818#978#0" expanded="false" />
+                <element signature="e#1020#1761#0" expanded="false" />
                 <element signature="e#1825#2618#0" expanded="false" />
+                <element signature="e#2652#3227#0" expanded="false" />
+                <element signature="e#3292#3811#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -60,7 +62,7 @@
       <file leaf-file-name="sol3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ex3/files/liav_submition/sol3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="805">
+            <state relative-caret-position="1147">
               <caret line="244" column="42" lean-forward="true" selection-start-line="244" selection-start-column="42" selection-end-line="244" selection-end-column="42" />
               <folding>
                 <element signature="e#840#1061#0" expanded="false" />
@@ -850,7 +852,14 @@
       <option name="project" value="LOCAL" />
       <updated>1482687776647</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="ex3 - used some functional programing (map, functools.partial - carry function) to avoid for loops. may need to go back">
+      <created>1482693652701</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1482693652701</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView">
@@ -901,7 +910,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Missing last step for task 3.4" />
     <MESSAGE value="Finished first attempt of task 3.4" />
     <MESSAGE value="Liav gave me his code and hopefully ill be able to speed up the process" />
     <MESSAGE value="Finished task 3.4. (may be there are a few problems compared to the facebook sol)" />
@@ -926,7 +934,8 @@
     <MESSAGE value="ex3 - in render_pyramid" />
     <MESSAGE value="ex3 - done with display_pyramid" />
     <MESSAGE value="ex3 - finished code. I need to make the photos for the last part and delete extra for loops" />
-    <option name="LAST_COMMIT_MESSAGE" value="ex3 - finished code. I need to make the photos for the last part and delete extra for loops" />
+    <MESSAGE value="ex3 - used some functional programing (map, functools.partial - carry function) to avoid for loops. may need to go back" />
+    <option name="LAST_COMMIT_MESSAGE" value="ex3 - used some functional programing (map, functools.partial - carry function) to avoid for loops. may need to go back" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1112,7 +1121,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ex3/files/liav_submition/sol3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="805">
+        <state relative-caret-position="1147">
           <caret line="244" column="42" lean-forward="true" selection-start-line="244" selection-start-column="42" selection-end-line="244" selection-end-column="42" />
           <folding>
             <element signature="e#840#1061#0" expanded="false" />
@@ -1122,14 +1131,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ex3/submition/sol3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="105" selection-end-column="91" />
+        <state relative-caret-position="524">
+          <caret line="198" column="48" lean-forward="false" selection-start-line="198" selection-start-column="48" selection-end-line="198" selection-end-column="48" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
             <element signature="e#292#464#0" expanded="false" />
             <element signature="e#512#789#0" expanded="false" />
             <element signature="e#818#978#0" expanded="false" />
+            <element signature="e#1020#1761#0" expanded="false" />
             <element signature="e#1825#2618#0" expanded="false" />
+            <element signature="e#2652#3227#0" expanded="false" />
+            <element signature="e#3292#3811#0" expanded="false" />
           </folding>
         </state>
       </provider>
