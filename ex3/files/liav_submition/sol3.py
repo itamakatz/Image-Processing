@@ -246,3 +246,22 @@ def blending_example2():
 
 
 # --------------------------end-----------------------------#
+
+
+im = read_image(relpath("givat2.jpg"), 1)
+max_levels, filter_size = 4, 3
+
+# pyr, filter_vec = build_gaussian_pyramid(im, max_levels, filter_size)
+pyr, filter_vec = build_laplacian_pyramid(im, max_levels, filter_size)
+
+print(filter_vec)
+print("\n")
+plt.figure(1)
+
+for i in range(len(pyr)):
+
+    half = len(pyr)  //  2
+    plt.subplot(2,half,i + 1)
+    plt.imshow(pyr[i], plt.cm.gray)
+
+plt.show()
