@@ -10,6 +10,13 @@ import scipy.special
 from scipy.signal import convolve2d
 from scipy import ndimage
 
+plot_index = 1
+
+def index():
+    global plot_index
+    plot_index += 1
+    return plot_index - 1
+
 def read_image(filename, representation):
     # filename - file to open as image
     # representation - is it a B&W or color image
@@ -98,9 +105,9 @@ def calc_log_len(x, levels):
     return
 
 def render_pyramid(pyr, levels):
-    orig_hor, orig_ver = pyr[0].shape[0], pyr[0].shape[1]
-    cc = (4 / 3) * (1 - 2**(-levels))
-    return np.zeros([orig_hor, orig_ver * cc], dtype=np.float32)
+    length = (pyr[0].shape[1] * 2 * (1 - 2**(-levels)))
+
+    return np.zeros([pyr[0].shape[0], int(length)], dtype=np.float32)
 
 def display_pyramid(pyr, levels):
     res = render_pyramid(pyr, levels)
@@ -110,7 +117,8 @@ def display_pyramid(pyr, levels):
         b = pyr[i].shape[1] + length
         res[0 : a, length : b] = pyr[i]
         length += pyr[i].shape[1]
-    plt.imshow(res)
+    plt.figure(index())
+    plt.imshow(np.clip(res, 0, 1), plt.cm.gray)
     return
 
 def pyramid_blending(im1, im2, mask, max_levels, filter_size_im, filter_size_mask):
@@ -125,17 +133,17 @@ def blending_example2():
 #
 
 im = read_image(relpath("givat2.jpg"), 1)
-max_levels, filter_size = 2, 3
-levels = max_levels
+max_levels, filter_size = 10, 3
+levels = 6
 
 
-# pyr, filter_vec = build_gaussian_pyramid(im, max_levels, filter_size)
-pyr, filter_vec = build_laplacian_pyramid(im, max_levels, filter_size)
+pyr, filter_vec = build_gaussian_pyramid(im, max_levels, filter_size)
+# pyr, filter_vec = build_laplacian_pyramid(im, max_levels, filter_size)
 coeff = np.ones(len(pyr))
 re_im = laplacian_to_image(pyr, filter_vec, coeff)
 display_pyramid(pyr, levels)
 
-plt.figure(1)
+plt.figure(index())
 
 for i in range(len(pyr)):
 
@@ -143,7 +151,7 @@ for i in range(len(pyr)):
     plt.subplot(2,half,i + 1)
     plt.imshow(pyr[i], plt.cm.gray)
 
-plt.figure(2)
+plt.figure(index())
 plt.imshow(re_im, plt.cm.gray)
 
 plt.show()
