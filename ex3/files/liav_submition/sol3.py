@@ -258,6 +258,8 @@ print(filter_vec)
 print("\n")
 plt.figure(1)
 
+a = blending_example2()
+
 for i in range(len(pyr)):
 
     half = len(pyr)  //  2
