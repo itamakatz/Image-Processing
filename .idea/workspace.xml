@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/itamar.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex1/sol1.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/files/presummition test/ex2.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/files/presummition test/ex2_presubmit.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/files/presummition test/test" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/files/presummition test/test.tar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/sol2.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/files/presubmit.zip" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex3/submition/sol3.py" afterPath="$PROJECT_DIR$/ex3/submition/sol3.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex2/make_zip.sh" afterPath="$PROJECT_DIR$/ex2/make_zip.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex3/make_zip.sh" afterPath="$PROJECT_DIR$/ex3/make_zip.sh" />
     </list>
     <ignored path="ex1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,7 +47,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="sol3.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sol3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ex3/submition/sol3.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="524">
@@ -59,11 +66,35 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="sol2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ex2/submition/sol2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sol1.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ex1/submition/sol1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="sol3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ex3/files/liav_submition/sol3.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1147">
-              <caret line="244" column="42" lean-forward="true" selection-start-line="244" selection-start-column="42" selection-end-line="244" selection-end-column="42" />
+              <caret line="244" column="42" lean-forward="false" selection-start-line="244" selection-start-column="42" selection-end-line="244" selection-end-column="42" />
               <folding>
                 <element signature="e#840#1061#0" expanded="false" />
               </folding>
@@ -246,6 +277,56 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="ex2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ip" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ip" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ex2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="submition" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ip" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ip" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ex1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="submition" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ip" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ip" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="ex1" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -263,25 +344,7 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/sol1.py" />
     <property name="js.eslint.eslintPackage" value="" />
   </component>
-  <component name="RunManager" selected="Python.sol3">
-    <configuration default="false" name="sol1" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ex1" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="ip" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ex1/sol1.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.sol1">
     <configuration default="false" name="sol3" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -580,13 +643,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ex2/" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ex2/submition/" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="ip" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ex2/sol2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ex2/submition/sol2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -609,6 +672,24 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
+    <configuration default="false" name="sol1" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ex1/submition/" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="ip" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ex1/submition/sol1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.sol2_liav" />
       <item index="1" class="java.lang.String" itemvalue="Python.sol2_for_testing" />
@@ -618,9 +699,8 @@
       <item index="5" class="java.lang.String" itemvalue="Python.sol3" />
     </list>
     <recent_temporary>
-      <list size="2">
+      <list size="1">
         <item index="0" class="java.lang.String" itemvalue="Python.sol3" />
-        <item index="1" class="java.lang.String" itemvalue="Python.sol1" />
       </list>
     </recent_temporary>
   </component>
@@ -859,7 +939,14 @@
       <option name="project" value="LOCAL" />
       <updated>1482693652701</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="ex3 - finished code documentation">
+      <created>1482695577222</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1482695577222</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TodoView">
@@ -910,7 +997,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Finished first attempt of task 3.4" />
     <MESSAGE value="Liav gave me his code and hopefully ill be able to speed up the process" />
     <MESSAGE value="Finished task 3.4. (may be there are a few problems compared to the facebook sol)" />
     <MESSAGE value="Started task 3.5." />
@@ -935,7 +1021,8 @@
     <MESSAGE value="ex3 - done with display_pyramid" />
     <MESSAGE value="ex3 - finished code. I need to make the photos for the last part and delete extra for loops" />
     <MESSAGE value="ex3 - used some functional programing (map, functools.partial - carry function) to avoid for loops. may need to go back" />
-    <option name="LAST_COMMIT_MESSAGE" value="ex3 - used some functional programing (map, functools.partial - carry function) to avoid for loops. may need to go back" />
+    <MESSAGE value="ex3 - finished code documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="ex3 - finished code documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -958,15 +1045,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ex2/ex2_jupyter.ipynb" />
-    <entry file="file://$PROJECT_DIR$/ex1/sol1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ex2/sol2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1122,7 +1200,7 @@
     <entry file="file://$PROJECT_DIR$/ex3/files/liav_submition/sol3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1147">
-          <caret line="244" column="42" lean-forward="true" selection-start-line="244" selection-start-column="42" selection-end-line="244" selection-end-column="42" />
+          <caret line="244" column="42" lean-forward="false" selection-start-line="244" selection-start-column="42" selection-end-line="244" selection-end-column="42" />
           <folding>
             <element signature="e#840#1061#0" expanded="false" />
           </folding>
@@ -1142,6 +1220,26 @@
             <element signature="e#1825#2618#0" expanded="false" />
             <element signature="e#2652#3227#0" expanded="false" />
             <element signature="e#3292#3811#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex2/submition/sol2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex1/submition/sol1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
