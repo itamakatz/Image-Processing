@@ -168,8 +168,8 @@ def examples(path_1, path_2, mask_path, max_levels, filter_size_im, filter_size_
     im2 = read_image(relpath(path_2), 2)
     # mult by 255 to revert the normalization so the mask is binary
     mask = read_image(relpath(mask_path), 1) * 255
-    mask[mask > 0.5] = True
-    mask[mask <= 0.5] = False
+    mask[mask > 0.5] = 1
+    mask[mask <= 0.5] = 0
     mask.astype(np.bool_)
     # calc all the RGB axis
     im_blend = im1 * 0
@@ -190,18 +190,12 @@ def examples(path_1, path_2, mask_path, max_levels, filter_size_im, filter_size_
     return im1, im2, mask, im_blend
 
 def blending_example1():
-    return examples('images/im1_huji.jpg', 'images/im1_apple.jpg', 'images/im1_filter.jpg', 6, 55, 1)
+    return examples('race2.jpg', 'givat2.jpg', 'mask2.jpg', 6, 1, 3)
 
 def blending_example2():
-    return examples('images/im2_flower.jpg', 'images/im2_eye.jpg', 'images/im2_filter.jpg', 6, 55, 11)
+    return examples('race2.jpg', 'givat2.jpg', 'mask2.jpg', 6, 1, 3)
 
 #
 
-im1, im2, mask, im_blend = blending_example1()
+# im1, im2, mask, im_blend = blending_example1()
 # im1, im2, mask, im_blend = blending_example2()
-
-plt.figure(index())
-
-plt.imshow(im_blend)
-
-plt.show()

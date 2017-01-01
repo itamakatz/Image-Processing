@@ -1,0 +1,34 @@
+Answer to question Q2:
+
+Nothing to serious :) 
+
+(spoiler alert - the proof below is pretty cool)
+
+What happens is that the image is broken into four as if we didn't
+Use the ifftshift but the intersection of the four blocks is not
+Necessarily in the middle. This happens because like we learned
+In class, to be able to use fft, we assume that the image is periodic.
+
+For the more technical explanation, one of the properties of the DFT is 
+that by shifting in the spatial domain we in fact multiply the shifting
+Amount on the exponent of the W notation. That makes a lot of sense
+Because shifting is the main operation when computation convolution, 
+and the representation in the frequency domain is a multiplication.
+
+Back to our subject - since the shifting is a multiplication in the
+Frequency domain and after that we multiply the filter and the image,
+you could easily argue that the one that was shifted in the first 
+place was not the kernel but the image!!
+
+In 1D it would look something like this (sorry for the informality but 
+its a bit hard to write equations like this..) :
+
+
+conv(x[n], ker[l - m])  <->  X[k] * KER[k] * W ^ (-m)  <->  conv(x[n - m], ker[l])
+
+I personally think this is unbelievable! Hot stuff.
+
+To sum up - this means that by shifting the center of he kernel, it simply
+Moves the center of the image we are blurring.
+
+M.A.S.H.A.L.
