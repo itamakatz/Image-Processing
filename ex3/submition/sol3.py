@@ -87,7 +87,7 @@ def expand(filter_vec, im):
     # return - the expanded image after interpolation
 
     expand = np.zeros([im.shape[0] * 2, im.shape[1] * 2], dtype=np.float32)
-    expand[1::2, 1::2] = im
+    expand[0::2, 0::2] = im
     expand = scipy.ndimage.filters.convolve(expand, filter_vec, output=None, mode='mirror')
     expand = scipy.ndimage.filters.convolve(expand.transpose(), filter_vec, output=None, mode='mirror')
     return (expand.transpose()).astype(np.float32)
@@ -114,12 +114,23 @@ def laplacian_to_image(lpyr, filter_vec, coeff):
     # mult by the coefficient
     return (im + lpyr[0] * coeff[0]).astype(np.float32)
 
+# ===========================================================================================================================
+
 def render_pyramid(pyr, levels):
     # calc the length of the returned matrix by the geometric progression
     length = (pyr[0].shape[1] * 2 * (1 - 2**(-levels)))
 
     # return the empty matrix
     return np.zeros([pyr[0].shape[0], int(length)], dtype=np.float32)
+
+def stretch_values(pyr_element):
+    #######################################################
+    # stretching pyramid values to [0,1] before displaying
+    #######################################################
+    minimum = np.min(pyr_element)
+    maximum = np.max(pyr_element)
+    range_ = maximum - minimum
+    return 1 - ((maximum - pyr_element) / range_)
 
 def display_pyramid(pyr, levels):
     res = render_pyramid(pyr, levels)
@@ -133,6 +144,8 @@ def display_pyramid(pyr, levels):
     plt.imshow(np.clip(res, 0, 1), plt.cm.gray)
     return
 
+
+# ===========================================================================================================================
 def pyramid_blending(im1, im2, mask, max_levels, filter_size_im, filter_size_mask):
     # calc L1,L2, G1
     im1_lpyr, filter_vec = build_laplacian_pyramid(im1, max_levels, filter_size_im)
@@ -170,7 +183,7 @@ def examples(path_1, path_2, mask_path, max_levels, filter_size_im, filter_size_
     mask = read_image(relpath(mask_path), 1) * 255
     mask[mask > 0.5] = True
     mask[mask <= 0.5] = False
-    mask.astype(np.bool_)
+    mask = mask.astype(np.bool_)
     # calc all the RGB axis
     im_blend = im1 * 0
     im_blend[:,:,0] = pyramid_blending(im1[:,:,0], im2[:,:,0], mask, max_levels, filter_size_im, filter_size_mask)
@@ -190,18 +203,18 @@ def examples(path_1, path_2, mask_path, max_levels, filter_size_im, filter_size_
     return im1, im2, mask, im_blend
 
 def blending_example1():
-    return examples('images/im1_huji.jpg', 'images/im1_apple.jpg', 'images/im1_filter.jpg', 6, 55, 1)
+    return examples('images/im1_huji.jpg', 'images/im1_apple.jpg', 'images/im1_filter.jpg', 2, 3, 55)
 
 def blending_example2():
-    return examples('images/im2_flower.jpg', 'images/im2_eye.jpg', 'images/im2_filter.jpg', 6, 55, 11)
+    return examples('images/im2_flower.jpg', 'images/im2_eye.jpg', 'images/im2_filter.jpg', 4, 31, 55)
 
 #
 
-im1, im2, mask, im_blend = blending_example1()
-# im1, im2, mask, im_blend = blending_example2()
-
-plt.figure(index())
-
-plt.imshow(im_blend)
-
-plt.show()
+# im1, im2, mask, im_blend = blending_example1()
+im1, im2, mask, im_blend = blending_example2()
+#
+# plt.figure(index())
+#
+# plt.imshow(im_blend)
+#
+# plt.show()
