@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex4/submition/sol4_utils.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ex4/files/additional_files/sol4_add.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ex4/files/ex4_liav.zip" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex4/submition/sol4.py" afterPath="$PROJECT_DIR$/ex4/submition/sol4.py" />
     </list>
     <ignored path="ex1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,14 +39,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="sol3.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sol3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ex3/submition/sol3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="76">
+              <caret line="4" column="29" lean-forward="true" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -65,14 +59,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sol4.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="sol4.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ex4/files/liavs_submition/sol4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-              <folding>
-                <element signature="e#200#241#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="133">
+              <caret line="7" column="24" lean-forward="true" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1020,7 +1012,14 @@
       <option name="project" value="LOCAL" />
       <updated>1483370701699</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="ex4 - added all files and started code">
+      <created>1484312962706</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1484312962706</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1034,7 +1033,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-1" width="1922" height="1182" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12846482" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987747" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1071,7 +1070,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Started task 3.5." />
     <MESSAGE value="Finished the color part of task 3.5.  yet to finish the B&amp;W" />
     <MESSAGE value="All done." />
     <MESSAGE value="All done. (with README file etc)" />
@@ -1096,7 +1094,8 @@
     <MESSAGE value="ex3 - finished code documentation" />
     <MESSAGE value="General - organized the dirs and files" />
     <MESSAGE value="ex3 - 4.1 added the final blend images" />
-    <option name="LAST_COMMIT_MESSAGE" value="ex3 - 4.1 added the final blend images" />
+    <MESSAGE value="ex4 - added all files and started code" />
+    <option name="LAST_COMMIT_MESSAGE" value="ex4 - added all files and started code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1331,13 +1330,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ex4/files/liavs_submition/sol4.py">
+    <entry file="file://$PROJECT_DIR$/ex3/submition/sol3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="e#200#241#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="76">
+          <caret line="4" column="29" lean-forward="true" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1349,13 +1346,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ex3/submition/sol3.py">
+    <entry file="file://$PROJECT_DIR$/ex4/files/liavs_submition/sol4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="133">
+          <caret line="7" column="24" lean-forward="true" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
