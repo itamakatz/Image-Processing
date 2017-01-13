@@ -1,21 +1,7 @@
 Answer to question Q3:
 
-Well, the main difference is in the complexity. By using fft
-we can get a complexity of O(N^2 * NlogN) as opposed to O(N^3) 
-using convolution.
 
-Another difference is that by padding the kernel in the spatial 
-domain, we are in fact interpolating the result of the kernel 
-in the frequency domain to match the dimensions. Since 
-interpolation may not be an exact representation, could lose
-precision of the kernel.
-
-Beside that, due to the padding done in the spatial domain, the 
-resulting image has darker edges since at those location
-most of thematrix multiplications consist of zeros.
-
-Lastly, there may be a difference in the result due to
-normalization standards of the procedure. Both in the 
-transformations as well as with the weights of the kernel in
-the transformation.
-
+With higher number of levels, we'll get better blend in
+the environment. The reason is that we include more
+low frequencies in the pyramid blending stage, which make
+the blending more noticed.

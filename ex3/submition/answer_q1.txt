@@ -1,7 +1,6 @@
 Answer to question Q1:
 
-Using a kernel in the spatial dimension is just an approximation
-because we use a perticular kernel, while in the frequency domain we
-are not restrained to choise of kernel but instead we use the more global
-derivatives of the frequency domain.
+Multiplying each level with a different value emphasizes
+certain ares in the frequency domain. So we are actually
+trying to control those areas of the drequency domain.
 

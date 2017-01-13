@@ -1,6 +1,6 @@
-ITAMAKATZ
+itamakatz
 
-==== README for ex1 ===
+==== README for ex3 ===
 
 List of submitted files:
 
@@ -8,5 +8,19 @@ README - this file
 answer_qt1.txt - Answer to question Q1
 answer_qt2.txt - Answer to question Q2
 answer_qt3.txt - Answer to question Q3
-sol2.py - python3 code
+sol3.py - python3 code
+images - directory containing the blending examples images:
 
+    - im1_apple.jpg
+ 1  - im1_filter.jpg
+    - im1_huji.jpg
+
+    - im2_eye.jpg
+ 2  - im2_filter.jpg
+    - im2_flower.jpg
+
+
+* Note: Those pictures were taken by me. I like practicing photography
+  in my spare time and those pictures were taken from special and artistic
+  points of view. You are more than welcome to visit my website ik-art.com
+  for more photos.
