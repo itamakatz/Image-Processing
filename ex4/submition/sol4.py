@@ -6,6 +6,7 @@ import scipy.signal as sg
 import numpy as np
 import itertools
 import heapq
+import functools
 from scipy.signal import convolve2d
 
 
@@ -18,7 +19,8 @@ def harris_corner_detector(im):
     I_y = convolve2d(im, np.transpose(der), mode='same')
 
     M = np.array([[np.square(I_x),np.multiply(I_x, I_y)],[np.multiply(I_y, I_x), np.square(I_x)]])
-    M = np.array(list(map(ut.blur_spatial, M)))
+    M = np.array(list(map(functools.partial(ut.blur_spatial_rev, 3), M)))
+
     R = np.linalg.det(M) + 0.04*np.square(np.trace(M))
 
     return np.transpose(np.nonzero(ut.non_maximum_suppression(R)))

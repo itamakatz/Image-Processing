@@ -30,6 +30,9 @@ def create_ker(kernel_size):
 def blur_spatial (im, kernel_size):
     return convolve2d(im, create_ker(kernel_size), mode='same')
 
+def blur_spatial_rev(kernel_size, im):
+    return blur_spatial (im, kernel_size)
+
 # ===================== ex3 ===================== #
 
 def create_filter_vec(filter_size):

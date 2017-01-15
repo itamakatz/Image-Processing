@@ -1,4 +1,6 @@
 from scipy.ndimage import map_coordinates
+import os
+import functools
 import sol4_utils as ut
 import sol4_utils_liav as sut
 import sol4_add as ad
@@ -7,7 +9,17 @@ import scipy.signal as sg
 import numpy as np
 import itertools
 import heapq
+
 from scipy.signal import convolve2d
+
+def relpath(filename):
+    # converts relative paths to absolute
+    # filename - relative path
+    # returns - absolute path
+    return os.path.join(os.path.dirname(__file__), filename)
+
+def blur_spatial_rev_liav(ker, im):
+    return sut.blur_spatial(im, ker)
 
 def harris_corner_detector(im):
     der = np.array([[1,0,-1]])
@@ -15,11 +27,15 @@ def harris_corner_detector(im):
     I_x = convolve2d(im, der, mode='same')
     I_y = convolve2d(im, np.transpose(der), mode='same')
 
-    M = np.array([[np.square(I_x),np.multiply(I_x, I_y)],[np.multiply(I_y, I_x), np.square(I_x)]])
-    M = np.array(list(map(ut.blur_spatial, M)))
-    R = np.linalg.det(M) + 0.04*np.square(np.trace(M))
+    M = np.array([np.square(I_x), np.multiply(I_x, I_y), np.multiply(I_y, I_x), np.square(I_y)])
+    M = np.array(list(map(functools.partial(ut.blur_spatial_rev, 3), M)))
+    R = np.multiply(M[0], M[3]) - np.multiply(M[1], M[2]) - 0.04 * (M[0] + M[3])
+    # M = np.array(list(map(functools.partial(ut.blur_spatial_rev, 3), M))).reshape([2, 2, M.shape[1], M.shape[2]])
+    # R = np.multiply(M[0,0], M[1,1]) - np.multiply(M[0,1], M[1,0]) - 0.04 * (M[0,0] + M[1,1])
+    # R = np.multiply(M[0,0], M[1,1]) - np.multiply(M[0,1], M[1,0]) - 0.04 * np.square(np.trace(M))
 
-    return np.transpose(np.nonzero(ut.non_maximum_suppression(R)))
+    return R
+    # return np.transpose(np.nonzero(ut.non_maximum_suppression(R)))
 
 def harris_corner_detector_liav(im):
     #############################################################
@@ -37,4 +53,11 @@ def harris_corner_detector_liav(im):
     det = Ix_blur * Iy_blur - IxIy_blur ** 2
     tr = Ix_blur + Iy_blur
     R = det - 0.04 * (tr ** 2)
-    return np.transpose(np.nonzero(sut.non_maximum_suppression(R)))
+    return R
+    # return np.transpose(np.nonzero(sut.non_maximum_suppression(R)))
+
+a = harris_corner_detector(ut.read_image(relpath("oxford2.jpg"), 1))
+
+b = harris_corner_detector_liav(sut.read_image(relpath("oxford2.jpg"), 1))
+
+print("hi")
