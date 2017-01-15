@@ -26,7 +26,7 @@ def sample_descriptor(im, pos, desc_rad):
 
 
 def find_features(pyr):
-
+    return
 
 
 # --------------------------3.2-----------------------------#

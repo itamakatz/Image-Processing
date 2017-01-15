@@ -27,14 +27,11 @@ def read_image(filename, representation):
     # convert to float and normalize
     return (im / 255).astype(np.float32)
 
-
 def relpath(filename):
     # converts relative paths to absolute
     # filename - relative path
     # returns - absolute path
     return os.path.join(os.path.dirname(__file__), filename)
-
-
 
 def create_filter_vec(filter_size):
     # creates a binomial coefficient of length filter_size
@@ -56,8 +53,6 @@ def create_filter_vec(filter_size):
     # normalize
     return (filter / np.sum(filter)).astype(np.float32)
 
-
-
 def build_gaussian_pyramid(im, max_levels, filter_size):
     # calc the filter array
     filter_vec = create_filter_vec(filter_size)
@@ -73,15 +68,11 @@ def build_gaussian_pyramid(im, max_levels, filter_size):
         pyr[i] = (pyr[i].transpose()[::2, ::2]).astype(np.float32)
     return pyr, filter_vec
 
-
-
 def stretch(elem):
     # stretching to [0,1]
     max_ =  np.max(elem)
     range_ = max_ - np.min(elem)
     return 1 - ((max_ - elem) / range_)
-
-
 
 def expand(filter_vec, im):
     # method that helps calculate an expanded image given an image and a kernel array
@@ -94,8 +85,6 @@ def expand(filter_vec, im):
     expand = scipy.ndimage.filters.convolve(expand.transpose(), filter_vec, output=None, mode='mirror')
     return (expand.transpose()).astype(np.float32)
 
-
-
 def build_laplacian_pyramid(im, max_levels, filter_size):
     # build the laplacian pyramid from a given image
     gauss_pyr, filter_vec = build_gaussian_pyramid(im, max_levels, filter_size)
@@ -107,8 +96,6 @@ def build_laplacian_pyramid(im, max_levels, filter_size):
     pyr[-1] = gauss_pyr[-1]
     return pyr, filter_vec
 
-
-
 def laplacian_to_image(lpyr, filter_vec, coeff):
     im = np.array([[0]]).astype(np.float32)
     # add leyers and expand for next iteration
@@ -116,7 +103,6 @@ def laplacian_to_image(lpyr, filter_vec, coeff):
         im = expand(filter_vec, im + lpyr[-(i + 1)] * coeff[-(i + 1)])
     # mult by the coefficient
     return (im + lpyr[0] * coeff[0]).astype(np.float32)
-
 
 def render_pyramid(pyr, levels):
     # calc the length of the returned matrix by the geometric progression
@@ -126,8 +112,6 @@ def render_pyramid(pyr, levels):
         curr = np.ceil(curr/2)
     # return the empty matrix
     return np.zeros([pyr[0].shape[0], int(length)], dtype=np.float32)
-
-
 
 def display_pyramid(pyr, levels):
     res = render_pyramid(pyr, levels)
@@ -142,8 +126,6 @@ def display_pyramid(pyr, levels):
     plt.show()
     return
 
-
-
 def pyramid_blending(im1, im2, mask, max_levels, filter_size_im, filter_size_mask):
     # calc L1,L2, G1
     im1_lpyr, filter_vec = build_laplacian_pyramid(im1, max_levels, filter_size_im)
@@ -154,8 +136,6 @@ def pyramid_blending(im1, im2, mask, max_levels, filter_size_im, filter_size_mas
     # clip to truncate the laplacian negative values
     return np.clip(laplacian_to_image(out_pyrl, filter_vec, np.ones(len(im1_lpyr))), 0, 1)
 
-
-
 def sub_plot(im, arg, color):
     # faster way to plot many images in one figure
     # im - im to plot
@@ -164,7 +144,6 @@ def sub_plot(im, arg, color):
     plt.subplot(arg)
     plt.imshow(im) if color else plt.imshow(im, plt.cm.gray)
     return
-
 
 def examples(path_1, path_2, mask_path, max_levels, filter_size_im, filter_size_mask):
     # general function to plot blending examples
@@ -198,9 +177,6 @@ def examples(path_1, path_2, mask_path, max_levels, filter_size_im, filter_size_
 
     plt.show()
     return im1, im2, mask, im_blend
-
-
-
 
 def blending_example1():
     return examples('images/im1_huji.jpg', 'images/im1_apple.jpg', 'images/im1_filter.jpg', 2, 3, 55)
