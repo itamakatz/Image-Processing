@@ -18,13 +18,11 @@ def harris_corner_detector(im):
     I_x = convolve2d(im, der, mode='same')
     I_y = convolve2d(im, np.transpose(der), mode='same')
 
-    M = np.array([[np.square(I_x),np.multiply(I_x, I_y)],[np.multiply(I_y, I_x), np.square(I_x)]])
+    M = np.array([np.square(I_x), np.multiply(I_x, I_y), np.square(I_y)])
     M = np.array(list(map(functools.partial(ut.blur_spatial_rev, 3), M)))
+    R = np.multiply(M[0], M[2]) - np.square(M[1]) - 0.04 * np.square((M[0] + M[2]))
 
-    R = np.linalg.det(M) + 0.04*np.square(np.trace(M))
-
-    return np.transpose(np.nonzero(ut.non_maximum_suppression(R)))
-
+    return np.transpose(np.nonzero(ad.non_maximum_suppression(R)))
 
 def sample_descriptor(im, pos, desc_rad):
     return

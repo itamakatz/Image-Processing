@@ -18,24 +18,17 @@ def relpath(filename):
     # returns - absolute path
     return os.path.join(os.path.dirname(__file__), filename)
 
-def blur_spatial_rev_liav(ker, im):
-    return sut.blur_spatial(im, ker)
-
 def harris_corner_detector(im):
     der = np.array([[1,0,-1]])
 
     I_x = convolve2d(im, der, mode='same')
     I_y = convolve2d(im, np.transpose(der), mode='same')
 
-    M = np.array([np.square(I_x), np.multiply(I_x, I_y), np.multiply(I_y, I_x), np.square(I_y)])
+    M = np.array([np.square(I_x), np.multiply(I_x, I_y), np.square(I_y)])
     M = np.array(list(map(functools.partial(ut.blur_spatial_rev, 3), M)))
-    R = np.multiply(M[0], M[3]) - np.multiply(M[1], M[2]) - 0.04 * (M[0] + M[3])
-    # M = np.array(list(map(functools.partial(ut.blur_spatial_rev, 3), M))).reshape([2, 2, M.shape[1], M.shape[2]])
-    # R = np.multiply(M[0,0], M[1,1]) - np.multiply(M[0,1], M[1,0]) - 0.04 * (M[0,0] + M[1,1])
-    # R = np.multiply(M[0,0], M[1,1]) - np.multiply(M[0,1], M[1,0]) - 0.04 * np.square(np.trace(M))
+    R = np.multiply(M[0], M[2]) - np.square(M[1]) - 0.04 * np.square((M[0] + M[2]))
 
-    return R
-    # return np.transpose(np.nonzero(ut.non_maximum_suppression(R)))
+    return np.transpose(np.nonzero(ad.non_maximum_suppression(R)))
 
 def harris_corner_detector_liav(im):
     #############################################################
@@ -53,8 +46,8 @@ def harris_corner_detector_liav(im):
     det = Ix_blur * Iy_blur - IxIy_blur ** 2
     tr = Ix_blur + Iy_blur
     R = det - 0.04 * (tr ** 2)
-    return R
-    # return np.transpose(np.nonzero(sut.non_maximum_suppression(R)))
+    # return R
+    return np.transpose(np.nonzero(sut.non_maximum_suppression(R)))
 
 a = harris_corner_detector(ut.read_image(relpath("oxford2.jpg"), 1))
 
