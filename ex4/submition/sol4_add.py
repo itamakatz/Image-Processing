@@ -54,7 +54,7 @@ def non_maximum_suppression(image):
 
   return ret
 
-def spread_out_corners(im, m, n, radius):
+  def spread_out_corners(im, m, n, radius):
   """
   Split the image im to m by n rectangles and use harris_corner_detector on each.
   input:

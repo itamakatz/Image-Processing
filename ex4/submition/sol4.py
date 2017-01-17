@@ -25,6 +25,8 @@ def harris_corner_detector(im):
     return np.transpose(np.nonzero(ad.non_maximum_suppression(R)))
 
 def sample_descriptor(im, pos, desc_rad):
+    desc = np.zeros((desc_rad * 2 + 1, desc_rad * 2 + 1, pos.shape[0]))
+
     return
 
 # NOT REQUIRED
@@ -33,7 +35,8 @@ def sample_descriptor(im, pos, desc_rad):
 
 
 def find_features(pyr):
-    return
+    feature_loc = ad.spread_out_corners(pyr[0], 7, 7, 12)
+    return sample_descriptor(pyr[2], feature_loc, 3), feature_loc
 
 
 # --------------------------3.2-----------------------------#
