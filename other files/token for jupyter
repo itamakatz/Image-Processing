@@ -1,0 +1,7 @@
+after running jupyter notebook, time in the shell:
+
+$ jupyter notebook list
+
+output:
+Currently running servers:
+http://localhost:8888/?token=abc... :: /home/you/notebooks

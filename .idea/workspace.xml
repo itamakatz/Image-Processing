@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex4/files/ex4_jupyter.ipynb" afterPath="$PROJECT_DIR$/ex4/files/ex4_jupyter.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex4/submition/sol4.py" afterPath="$PROJECT_DIR$/ex4/submition/sol4.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex4/submition/sol4_add.py" afterPath="$PROJECT_DIR$/ex4/submition/sol4_add.py" />
     </list>
     <ignored path="ex1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1087,7 +1084,14 @@
       <option name="project" value="LOCAL" />
       <updated>1484511627259</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="ex4 - soon finishing 3.1">
+      <created>1484687010750</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1484687010750</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1138,7 +1142,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="All ready to start ex2" />
     <MESSAGE value="Started 1.2" />
     <MESSAGE value="Done with 1,  started 2.2" />
     <MESSAGE value="Done with first try of code.  Now need to debug" />
@@ -1163,7 +1166,8 @@
     <MESSAGE value="ex4 - Added all the functions related sol4_utils.py" />
     <MESSAGE value="ex4 - made a folder to check progress named my_test. also, finished the first function" />
     <MESSAGE value="ex4 - somewhere in the middle of harris" />
-    <option name="LAST_COMMIT_MESSAGE" value="ex4 - somewhere in the middle of harris" />
+    <MESSAGE value="ex4 - soon finishing 3.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="ex4 - soon finishing 3.1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
