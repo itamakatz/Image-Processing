@@ -85,8 +85,19 @@ def match_features(desc1, desc2, min_score):
 
 # --------------------------3.3-----------------------------#
 
+def apply_single_homography(H12, x, y):
+    coordin = np.array([x, y, 1])
+    product = np.dot(H12, coordin)
+    return product[:2] / product[2]
+
 def apply_homography(pos1, H12):
-    return
+    return np.array(list(map(functools.partial(apply_single_homography, H12), pos1[:,0], pos1[:,1])))
+#
+# def apply_homography_liav(pos1, H12):
+#     expand = np.column_stack((pos1, np.ones(len(pos1))))
+#     dot = np.dot(H12, expand.T).T
+#     normalized = (dot.T / dot[:,2]).T
+#     return np.delete(normalized, -1, axis=1)
 
 def ransac_homography(pos1, pos2, num_iters, inlier_tol):
     return
