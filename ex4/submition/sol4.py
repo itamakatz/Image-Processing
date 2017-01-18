@@ -29,8 +29,8 @@ def sample_descriptor(im, pos, desc_rad):
     desc = np.zeros((K, K, pos.shape[0]), dtype=np.float32)
     for idx in range(len(pos)):
         x, y = pos[idx][0].astype(np.float32) / 4, pos[idx][1].astype(np.float32) / 4
-        X, Y = np.meshgrid(np.linspace(x - desc_rad, x + desc_rad, K),
-                             np.linspace(y - desc_rad, y + desc_rad, K))
+        X, Y = np.meshgrid(np.linspace(x - desc_rad, x + desc_rad, K, dtype=np.float32),
+                             np.linspace(y - desc_rad, y + desc_rad, K, dtype=np.float32))
         XY = [X.reshape(K**2,), Y.reshape(K**2,)]
         iter_mat = map_coordinates(im, XY, order=1, prefilter=False).reshape(K, K)
         # normalize the descriptor
@@ -50,8 +50,38 @@ def find_features(pyr):
 
 # --------------------------3.2-----------------------------#
 
+max_
+
 def match_features(desc1, desc2, min_score):
-    return
+
+    flat1 = np.reshape(desc1, (-1, desc1.shape[2])).transpose().astype(dtype=np.float32)
+    flat2 = np.reshape(desc2, (-1, desc2.shape[2])).transpose().astype(dtype=np.float32)
+
+    score_desc1 = np.zeros([flat1.shape[1], 2, 2])
+    score_desc2 = np.zeros([flat2.shape[1], 2, 2])
+
+    for (i1, i2) in np.dstack(np.meshgrid(np.arange(flat1.shape[1]), np.arange(flat2.shape[1]))).reshape(-1, 2):
+
+        product = np.inner(flat1[i1], flat2[i2])
+        if product <= min_score:
+            continue
+
+        if product >= np.amin(score_desc1[i1, :, 0]):
+            score_desc1[i1, score_desc1[i1, :, 0].argmin(), :] = product, i2
+
+        if product >= np.amin(score_desc2[i2, :, 0]):
+            score_desc2[i2, score_desc2[i2, :, 0].argmin(), :] = product, i1
+
+    ret_desc1 = []
+    ret_desc2 = []
+
+    for (i1, i2) in np.dstack(np.meshgrid(np.arange(flat1.shape[1]), np.arange(flat2.shape[1]))).reshape(-1, 2):
+        if (score_desc1[i1, 0, 1] == i2 or score_desc1[i1, 1, 1] == i2) and \
+                (score_desc2[i2, 0, 1] == i1 or score_desc2[i2, 1, 1] == i1):
+            ret_desc1.append(i1)
+            ret_desc2.append(i2)
+
+    return np.array(ret_desc1), np.array(ret_desc2)
 
 # --------------------------3.3-----------------------------#
 
@@ -84,5 +114,7 @@ def render_panorama(ims, Hs):
 
 
 pyr, _ = ut.build_gaussian_pyramid(ut.read_image(ut.relpath("oxford2.jpg"), 1), 3, 3)
-a = find_features(pyr)
+pos = ad.spread_out_corners(pyr[0], 7, 7, 12)
+desc = sample_descriptor(pyr[2], pos, 3)
+
 print("hi")

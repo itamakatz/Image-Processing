@@ -104,11 +104,13 @@ def match_features(desc1, desc2, min_score):
     # matches two descriptors taken from desc1, desc2 according
     # to some minimal score min_score
     #############################################################
+
     match_ind1, match_ind2 = [], []
     desc1_2nd, desc2_2nd = {}, {}
     # flatting the descriptors
     flat_desc1 = list(map(np.ravel, np.rollaxis(desc1, 2)))
     flat_desc2 = list(map(np.ravel, np.rollaxis(desc2, 2)))
+
 
     for (idx1, d1), (idx2, d2) in itertools.product(enumerate(flat_desc1),
                                                     enumerate(flat_desc2)):
@@ -266,6 +268,15 @@ def render_panorama(ims, Hs):
     return panorama
 
 # --------------------------end-----------------------------#
+pyr, vec = sut.build_gaussian_pyramid(sut.read_image(relpath("external/oxford1.jpg"), 1), 3, 3)
+pos = spread_out_corners(pyr[0], 7, 7, 12)
+desc1 = sample_descriptor(pyr[2], pos, 3)
 
-a = im_to_points(sut.read_image(relpath("oxford2.jpg"), 1))
+pyr, vec = sut.build_gaussian_pyramid(sut.read_image(relpath("external/oxford2.jpg"), 1), 3, 3)
+pos = spread_out_corners(pyr[0], 7, 7, 12)
+desc2 = sample_descriptor(pyr[2], pos, 3)
+
+
+aa = match_features(desc1,desc2,3)
+
 print("hi")
