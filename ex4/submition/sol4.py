@@ -25,9 +25,18 @@ def harris_corner_detector(im):
     return np.transpose(np.nonzero(ad.non_maximum_suppression(R)))
 
 def sample_descriptor(im, pos, desc_rad):
-    desc = np.zeros((desc_rad * 2 + 1, desc_rad * 2 + 1, pos.shape[0]))
-
-    return
+    K = 1 + (2 * desc_rad)
+    desc = np.zeros((K, K, pos.shape[0]), dtype=np.float32)
+    for idx in range(len(pos)):
+        x, y = pos[idx][0].astype(np.float32) / 4, pos[idx][1].astype(np.float32) / 4
+        X, Y = np.meshgrid(np.linspace(x - desc_rad, x + desc_rad, K),
+                             np.linspace(y - desc_rad, y + desc_rad, K))
+        XY = [X.reshape(K**2,), Y.reshape(K**2,)]
+        iter_mat = map_coordinates(im, XY, order=1, prefilter=False).reshape(K, K)
+        # normalize the descriptor
+        mu = np.mean(iter_mat)
+        desc[:, :, idx] = (iter_mat - mu) / np.linalg.norm(iter_mat - mu)
+    return desc
 
 # NOT REQUIRED
 # def im_to_points(im):
@@ -72,3 +81,8 @@ def render_panorama(ims, Hs):
     return
 
 # --------------------------end-----------------------------#
+
+
+pyr, _ = ut.build_gaussian_pyramid(ut.read_image(ut.relpath("oxford2.jpg"), 1), 3, 3)
+a = find_features(pyr)
+print("hi")

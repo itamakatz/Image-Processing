@@ -3,7 +3,7 @@
 # WRITER: Liav Steinberg
 # EXERCISE : Image Processing ex4
 #############################################################
-
+import os
 from scipy.ndimage import map_coordinates
 import sol4_utils as sut
 import matplotlib.pyplot as plt
@@ -12,6 +12,12 @@ import numpy as np
 import itertools
 import heapq
 
+
+def relpath(filename):
+    # converts relative paths to absolute
+    # filename - relative path
+    # returns - absolute path
+    return os.path.join(os.path.dirname(__file__), filename)
 
 # --------------------------3.1-----------------------------#
 
@@ -260,3 +266,6 @@ def render_panorama(ims, Hs):
     return panorama
 
 # --------------------------end-----------------------------#
+
+a = im_to_points(sut.read_image(relpath("oxford2.jpg"), 1))
+print("hi")

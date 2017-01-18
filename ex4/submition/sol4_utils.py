@@ -1,3 +1,4 @@
+import os
 import functools
 import numpy as np
 import scipy.special
@@ -34,6 +35,12 @@ def blur_spatial_rev(kernel_size, im):
     return blur_spatial (im, kernel_size)
 
 # ===================== ex3 ===================== #
+
+def relpath(filename):
+    # converts relative paths to absolute
+    # filename - relative path
+    # returns - absolute path
+    return os.path.join(os.path.dirname(__file__), filename)
 
 def create_filter_vec(filter_size):
     # creates a binomial coefficient of length filter_size
