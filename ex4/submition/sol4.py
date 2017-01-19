@@ -50,7 +50,7 @@ def find_features(pyr):
 
 # --------------------------3.2-----------------------------#
 
-max_
+
 
 def match_features(desc1, desc2, min_score):
 
@@ -99,12 +99,34 @@ def apply_homography(pos1, H12):
 #     normalized = (dot.T / dot[:,2]).T
 #     return np.delete(normalized, -1, axis=1)
 
+
 def ransac_homography(pos1, pos2, num_iters, inlier_tol):
-    return
+
+    def all_least_squares(cuad_rand):
+        H12 = ad.least_squares_homography(pos1[cuad_rand[:2]], pos2[cuad_rand[-2:]])
+        # avoid unstable results
+        if H12 is None:
+            return 0
+        return np.square(np.sum(np.dot(apply_homography(pos1, H12), pos2)))
+
+    rand_array = np.random.random_integers(0, pos1.shape[0], size=(num_iters, 4))
+    coordinates = np.apply_along_axis(all_least_squares, 0, rand_array)
+
+    best_coordinates = np.arange(coordinates.shape[0])[coordinates > inlier_tol ** 2]
+    H12 = ad.least_squares_homography(pos1[best_coordinates], pos2[best_coordinates])
+
+    return H12, np.array(best_coordinates)
 
 
 def display_matches(im1, im2, pos1, pos2, inliers):
-    return
+    pos1, pos2 = np.array(pos1), np.array(pos2)
+    ins1, ins2 = pos1[inliers], pos2[inliers]
+    out1, out2 = np.delete(pos1, inliers, axis=0), np.delete(pos2, inliers, axis=0)
+    plt.figure()
+    plt.imshow(np.hstack((im1, im2)), 'gray')
+    plt.plot([ins1[:, 1], ins2[:, 1] + im1.shape[1]], [ins1[:, 0], ins2[:, 0]], mfc='r', c='y', lw=1.1, ms=5, marker='o')
+    plt.plot([out1[:, 1], out2[:, 1] + im1.shape[1]], [out1[:, 0], out2[:, 0]], mfc='r', c='b', lw=0.4, ms=5, marker='o')
+    plt.show()
 
 # --------------------------3.3-----------------------------#
 
@@ -123,9 +145,19 @@ def render_panorama(ims, Hs):
 
 # --------------------------end-----------------------------#
 
+im1 = ut.read_image(ut.relpath("external/oxford1.jpg"), 1)
+im2 = ut.read_image(ut.relpath("external/oxford2.jpg"), 1)
 
-pyr, _ = ut.build_gaussian_pyramid(ut.read_image(ut.relpath("oxford2.jpg"), 1), 3, 3)
-pos = ad.spread_out_corners(pyr[0], 7, 7, 12)
-desc = sample_descriptor(pyr[2], pos, 3)
+pyr1, _ = ut.build_gaussian_pyramid(im1, max_levels=3, filter_size=3)
+pyr2, _ = ut.build_gaussian_pyramid(im2, max_levels=3, filter_size=3)
+
+pos1, desc1 = find_features(pyr1)
+pos2, desc2= find_features(pyr2)
+
+match1, match2 = match_features(desc1, desc2, min_score=10)
+
+H12, inliers_ = ransac_homography(match1, match2, num_iters = 100, inlier_tol=10)
+
+display_matches(im1, im2, pos1, pos2, inliers_)
 
 print("hi")
