@@ -83,3 +83,18 @@ def spread_out_corners(im, m, n, radius):
 					 (corners[:,1]>radius) & (corners[:,1]<im.shape[0]-radius))
 	return corners[legit,:]
 
+
+	# corners = [np.empty((0, 2), dtype=np.int)]
+	# x_bound = np.linspace(0, im.shape[1], n + 1, dtype=np.int)
+	# y_bound = np.linspace(0, im.shape[0], m + 1, dtype=np.int)
+	# for i in range(n):
+	# 	for j in range(m):
+	# 		# Use Harris detector on every sub image.
+	# 		sub_im = im[y_bound[j]:y_bound[j + 1], x_bound[i]:x_bound[i + 1]]
+	# 		sub_corners = harris_corner_detector(sub_im)
+	# 		sub_corners += np.array([y_bound[j], x_bound[i]])[np.newaxis, :]
+	# 		corners.append(sub_corners)
+	# corners = np.vstack(corners)
+	# legit = ((corners[:, 0] > radius) & (corners[:, 1] < im.shape[1] - radius) &
+	# 		 (corners[:, 1] > radius) & (corners[:, 0] < im.shape[0] - radius))
+	# return corners[legit, :]
