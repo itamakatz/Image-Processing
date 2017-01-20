@@ -25,7 +25,6 @@ def harris_corner_detector(im):
 
 def sample_descriptor(im, pos, desc_rad):
     K = 1 + (2 * desc_rad)
-
     desc = np.zeros((K, K, pos.shape[0]), dtype=np.float32)
     for idx in range(len(pos)):
         x, y = pos[idx][0].astype(np.float32) / 4, pos[idx][1].astype(np.float32) / 4
@@ -52,87 +51,12 @@ def sample_descriptor(im, pos, desc_rad):
 #
 def find_features(pyr):
     pos = ad.spread_out_corners(pyr[0], 7, 7, 12)
-
+    # laa = pos[:, 0]
+    # lee = pos[:, 1]
+    # pos = np.array([lee, laa]).T
     return pos, sample_descriptor(pyr[2], pos, 3)
 
-# def spread_out_corners(im, m, n, radius):
-#     #############################################################
-#     # takes from the additional files
-#     #############################################################
-#     corners = [np.empty((0,2), dtype=np.int)]
-#     x_bound = np.linspace(0, im.shape[1], n+1, dtype=np.int)
-#     y_bound = np.linspace(0, im.shape[0], m+1, dtype=np.int)
-#     for i in range(n):
-#         for j in range(m):
-#             # Use Harris detector on every sub image.
-#             sub_im = im[y_bound[j]:y_bound[j+1], x_bound[i]:x_bound[i+1]]
-#             sub_corners = harris_corner_detector(sub_im)
-#             sub_corners += np.array([y_bound[j], x_bound[i]])[np.newaxis,:]
-#             corners.append(sub_corners)
-#     corners = np.vstack(corners)
-#     legit = ((corners[:,0]>radius) & (corners[:,1]<im.shape[1]-radius) &
-#              (corners[:,1]>radius) & (corners[:,0]<im.shape[0]-radius))
-#     return corners[legit,:]
-#
-#
-# def harris_corner_detector(im):
-#     #############################################################
-#     # implements harris method for corner detection
-#     #############################################################
-#     dx = np.array([[1, 0, -1]])
-#     dy = dx.transpose()
-#     Ix = convolve2d(im, dx, mode="same")
-#     Iy = convolve2d(im, dy, mode="same")
-#     # blurring
-#     Ix_blur = ut.blur_spatial(Ix ** 2, 3)
-#     Iy_blur = ut.blur_spatial(Iy ** 2, 3)
-#     IxIy_blur = ut.blur_spatial(Ix * Iy, 3)
-#     # compute determinant and trace of M
-#     det = Ix_blur * Iy_blur - IxIy_blur ** 2
-#     tr = Ix_blur + Iy_blur
-#     R = det - 0.04 * (tr ** 2)
-#     return np.transpose(np.nonzero(ad.non_maximum_suppression(R)))
-#
-#
-# def sample_descriptor(im, pos, desc_rad):
-#     #############################################################
-#     # descriptor sampling
-#     #############################################################
-#     K = 1 + (2 * desc_rad)
-#     desc = np.zeros((K, K, pos.shape[0]), dtype=np.float32)
-#     for idx in range(len(pos)):
-#         x, y = pos[idx][0].astype(np.float32) / 4, pos[idx][1].astype(np.float32) / 4
-#         # map the coordinates
-#         X = np.arange(y - desc_rad, y + desc_rad + 1)
-#         Y = np.arange(x - desc_rad, x + desc_rad + 1)
-#         indices = np.transpose([np.tile(Y, len(X)), np.repeat(X, len(Y))])
-#         curr_desc = map_coordinates(im, [indices[:, 0],indices[:, 1]],order=1, prefilter=False).reshape(K, K)
-#         # normalize the descriptor
-#         E = np.mean(curr_desc)
-#         curr_desc = (curr_desc - E) / np.linalg.norm(curr_desc - E)
-#         desc[:, :, idx] = curr_desc
-#     return desc
-#
-#
-# def im_to_points(im):
-#     #############################################################
-#     # implements the function in example_panoramas.py
-#     #############################################################
-#     pyr, vec = ut.build_gaussian_pyramid(im, 3, 3)
-#     return find_features(pyr)
-#
-
-# def find_features(pyr):
-#     #############################################################
-#     # finds features in an image given by its pyramid pyr
-#     #############################################################
-#     pos = spread_out_corners(pyr[0], 7, 7, 12)
-#     desc = sample_descriptor(pyr[2], pos, 3)
-#     return pos, desc
-
 # --------------------------3.2-----------------------------#
-
-
 
 def match_features(desc1, desc2, min_score):
 
