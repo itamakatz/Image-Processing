@@ -4,7 +4,6 @@
     <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex4/submition/sol4.py" afterPath="$PROJECT_DIR$/ex4/submition/sol4.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex4/submition/sol4_add.py" afterPath="$PROJECT_DIR$/ex4/submition/sol4_add.py" />
     </list>
     <ignored path="ex1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,7 +24,7 @@
     <SUITE FILE_PATH="coverage/ex1$sol1.coverage" NAME="sol1 Coverage Results" MODIFIED="1480022832473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ip$sol3.coverage" NAME="sol3 Coverage Results" MODIFIED="1483381328388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ex3/submition" />
     <SUITE FILE_PATH="coverage/ip$my_test.coverage" NAME="my_test Coverage Results" MODIFIED="1484575522909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ex4/files/my_test/" />
-    <SUITE FILE_PATH="coverage/ip$ex4_example_panoramas.coverage" NAME="ex4 example_panoramas Coverage Results" MODIFIED="1484922194924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ex4/submition/" />
+    <SUITE FILE_PATH="coverage/ip$ex4_example_panoramas.coverage" NAME="ex4 example_panoramas Coverage Results" MODIFIED="1484922554612" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ex4/submition/" />
     <SUITE FILE_PATH="coverage/ip$sol2_for_testing.coverage" NAME="sol2_for_testing Coverage Results" MODIFIED="1481495618814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ex2/files/" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -48,8 +47,8 @@
       <file leaf-file-name="sol4.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ex4/submition/sol4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-545">
-              <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+            <state relative-caret-position="437">
+              <caret line="107" column="0" lean-forward="true" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -148,8 +147,8 @@
         <option value="$PROJECT_DIR$/ex4/files/liavs_submition/sol4.py" />
         <option value="$PROJECT_DIR$/ex4/submition/example_panoramas.py" />
         <option value="$PROJECT_DIR$/ex4/files/ex4_jupyter.ipynb" />
-        <option value="$PROJECT_DIR$/ex4/submition/sol4.py" />
         <option value="$PROJECT_DIR$/ex4/submition/sol4_add.py" />
+        <option value="$PROJECT_DIR$/ex4/submition/sol4.py" />
       </list>
     </option>
   </component>
@@ -829,13 +828,6 @@
       <option name="presentableId" value="Default" />
       <updated>1479144846597</updated>
     </task>
-    <task id="LOCAL-00004" summary="Finished task 3.1">
-      <created>1479574402693</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1479574402693</updated>
-    </task>
     <task id="LOCAL-00005" summary="Finished task 3.2">
       <created>1479574756873</created>
       <option name="number" value="00005" />
@@ -1172,7 +1164,14 @@
       <option name="project" value="LOCAL" />
       <updated>1484910434089</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="ex4 - except &quot;display_matches&quot; - done with every thing till 3.3. next 3.4">
+      <created>1484922298670</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1484922298670</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1223,7 +1222,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Done with comments" />
     <MESSAGE value="Uploaded the ex2.zip file" />
     <MESSAGE value="Created code skeleton with all needed functions" />
     <MESSAGE value="Finished first 3.1 code, and added a jupyter file" />
@@ -1248,7 +1246,8 @@
     <MESSAGE value="ex4 - checking all together till 3.3" />
     <MESSAGE value="ex4 - somewhere checking till 3.3" />
     <MESSAGE value="ex4 - found a few bugs in the code till 3.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="ex4 - found a few bugs in the code till 3.3" />
+    <MESSAGE value="ex4 - except &quot;display_matches&quot; - done with every thing till 3.3. next 3.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="ex4 - except &quot;display_matches&quot; - done with every thing till 3.3. next 3.4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1262,11 +1261,6 @@
           <url>file://$PROJECT_DIR$/ex4/files/liavs_submition/sol4.py</url>
           <line>281</line>
           <option name="timeStamp" value="201" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ex4/submition/sol4.py</url>
-          <line>102</line>
-          <option name="timeStamp" value="295" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1542,8 +1536,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ex4/submition/sol4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-545">
-          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+        <state relative-caret-position="437">
+          <caret line="107" column="0" lean-forward="true" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

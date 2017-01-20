@@ -4,12 +4,7 @@ import sol4_add as ad
 import matplotlib.pyplot as plt
 import numpy as np
 import functools
-import itertools
-import heapq
 from scipy.signal import convolve2d
-
-
-# --------------------------3.1-----------------------------#
 
 def harris_corner_detector(im):
     der = np.array([[1,0,-1]])
@@ -28,16 +23,11 @@ def sample_descriptor(im, pos, desc_rad):
     desc = np.zeros((K, K, pos.shape[0]), dtype=np.float32)
     for idx in range(len(pos)):
         x, y = pos[idx][0].astype(np.float32) / 4, pos[idx][1].astype(np.float32) / 4
-        # y, x = pos[idx][0].astype(np.float32) / 4, pos[idx][1].astype(np.float32) / 4
         X, Y = np.meshgrid(np.linspace(x - desc_rad, x + desc_rad, K, dtype=np.float32),
                              np.linspace(y - desc_rad, y + desc_rad, K, dtype=np.float32))
 
         XY = [X.reshape(K ** 2, ), Y.reshape(K ** 2, )]
-        # XY = [Y.reshape(K**2,), X.reshape(K**2,)]
-
-        bb = np.array(XY)
-        iter_mat = map_coordinates(im, bb, order=1, prefilter=False).reshape(K, K)
-        # normalize the descriptor
+        iter_mat = map_coordinates(im, np.array(XY), order=1, prefilter=False).reshape(K, K)
         mu = np.mean(iter_mat)
         desc[:, :, idx] = (iter_mat - mu) / np.linalg.norm(iter_mat - mu)
         if np.any(np.isnan(desc[:, :, idx])):
@@ -51,12 +41,8 @@ def sample_descriptor(im, pos, desc_rad):
 #
 def find_features(pyr):
     pos = ad.spread_out_corners(pyr[0], 7, 7, 12)
-    # laa = pos[:, 0]
-    # lee = pos[:, 1]
-    # pos = np.array([lee, laa]).T
     return pos, sample_descriptor(pyr[2], pos, 3)
 
-# --------------------------3.2-----------------------------#
 
 def match_features(desc1, desc2, min_score):
 
@@ -103,23 +89,22 @@ def match_features(desc1, desc2, min_score):
     return np.array(ret_desc1), np.array(ret_desc2)
 
 # --------------------------3.3-----------------------------#
-#
-# def apply_single_homography(H12, pair):
-#     coordin = np.array([pair[0], pair[1], 1])
-#     product = np.dot(H12, coordin)
-#     return product[:2] / product[2]
-#
+
+
+
 # def apply_homography(pos1, H12):
+#     def apply_single_homography(H12, pair):
+#         coordin = np.array([pair[0], pair[1], 1])
+#         product = np.dot(H12, coordin)
+#         return product[:2] / product[2]
 #     return np.apply_along_axis(functools.partial(apply_single_homography, H12), 1, pos1)
 
-def apply_homography(pos1, H12):
-    #############################################################
-    # applying homographic transformation on given indexes
-    #############################################################
-    expand = np.column_stack((pos1, np.ones(len(pos1))))
-    dot = np.dot(H12, expand.T).T
-    normalized = (dot.T / dot[:,2]).T
-    return np.delete(normalized, -1, axis=1)
+# def apply_homography(pos1, H12):
+#
+#     expand = np.column_stack((pos1, np.ones(len(pos1))))
+#     dot = np.dot(H12, expand.T).T
+#     normalized = (dot.T / dot[:,2]).T
+#     return np.delete(normalized, -1, axis=1)
 
 def ransac_homography(pos1, pos2, num_iters, inlier_tol):
 
@@ -151,7 +136,7 @@ def display_matches(im1, im2, pos1, pos2, inliers):
     # plt.plot([out1[:, 1], out2[:, 1] + im1.shape[1]], [out1[:, 0], out2[:, 0]], mfc='r', c='b', lw=0.4, ms=5, marker='o')
     plt.show()
 
-# --------------------------3.3-----------------------------#
+# --------------------------3.4-----------------------------#
 
 def accumulate_homographies(H_successive, m):
     return
