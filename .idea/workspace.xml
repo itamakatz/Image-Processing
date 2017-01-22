@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex4/files/ex4_jupyter.ipynb" afterPath="$PROJECT_DIR$/ex4/files/ex4_jupyter.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex4/submition/sol4.py" afterPath="$PROJECT_DIR$/ex4/submition/sol4.py" />
     </list>
     <ignored path="ex1.iws" />
@@ -48,8 +47,8 @@
       <file leaf-file-name="sol4.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ex4/submition/sol4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="156" column="0" lean-forward="true" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
+            <state relative-caret-position="881">
+              <caret line="179" column="0" lean-forward="true" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -827,13 +826,6 @@
       <option name="presentableId" value="Default" />
       <updated>1479144846597</updated>
     </task>
-    <task id="LOCAL-00006" summary="Finishe task 3.3 and in the middle of 3.4">
-      <created>1479588674567</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1479588674567</updated>
-    </task>
     <task id="LOCAL-00007" summary="Missing last step for task 3.4">
       <created>1479589047221</created>
       <option name="number" value="00007" />
@@ -1170,7 +1162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1484922673024</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="ex4 - done with 4.1">
+      <created>1485116117942</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1485116117943</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1221,7 +1220,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Created code skeleton with all needed functions" />
     <MESSAGE value="Finished first 3.1 code, and added a jupyter file" />
     <MESSAGE value="Started 3.2" />
     <MESSAGE value="Added liavs solution to ex3" />
@@ -1246,7 +1244,8 @@
     <MESSAGE value="ex4 - found a few bugs in the code till 3.3" />
     <MESSAGE value="ex4 - except &quot;display_matches&quot; - done with every thing till 3.3. next 3.4" />
     <MESSAGE value="ex4 - made a few more changes, still missing dysplay_matches  AND applay_homography" />
-    <option name="LAST_COMMIT_MESSAGE" value="ex4 - made a few more changes, still missing dysplay_matches  AND applay_homography" />
+    <MESSAGE value="ex4 - done with 4.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="ex4 - done with 4.1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1535,8 +1534,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ex4/submition/sol4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="156" column="0" lean-forward="true" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
+        <state relative-caret-position="881">
+          <caret line="179" column="0" lean-forward="true" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

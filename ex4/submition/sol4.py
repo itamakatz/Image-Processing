@@ -91,7 +91,11 @@ def match_features(desc1, desc2, min_score):
 # --------------------------3.3-----------------------------#
 
 
-
+    #############################################################
+    # compute accumulated homographies between successive images
+    #############################################################    #############################################################
+    # compute accumulated homographies between successive images
+    #############################################################
 # def apply_homography(pos1, H12):
 #     def apply_single_homography(H12, pair):
 #         coordin = np.array([pair[0], pair[1], 1])
@@ -125,7 +129,11 @@ def ransac_homography(pos1, pos2, num_iters, inlier_tol):
 
     return H12, true_samples
 
-
+    #############################################################
+    # compute accumulated homographies between successive images
+    #############################################################    #############################################################
+    # compute accumulated homographies between successive images
+    #############################################################
 def display_matches(im1, im2, pos1, pos2, inliers):
     pos1, pos2 = np.array(pos1), np.array(pos2)
     ins1, ins2 = pos1[inliers], pos2[inliers]
@@ -153,7 +161,7 @@ def accumulate_homographies(H_successive, m):
     for i in range(m + 1, H_successive.shape[0]):
         ret_H[i] = ret_H[i].dot(ret_H[i - 1])
 
-    return ret_H
+    return np.divide(ret_H, ret_H[:,2,2])
 
 # --------------------------4.3-----------------------------#
 
@@ -163,6 +171,14 @@ def accumulate_homographies(H_successive, m):
 
 
 def render_panorama(ims, Hs):
+    # def apply_homography(pos1, H12):
+    def relevant_points(im):
+        return np.array((im[0, 0], im[0,- 1], im[-1, 0],
+                         im[-1, -1], im[im[0] // 2, im[1] // 2]))
+
+    relevant_points = np.apply_along_axis(relevant_points, 0, ims)
+
+
     return
 
 if __name__ == '__main__':
