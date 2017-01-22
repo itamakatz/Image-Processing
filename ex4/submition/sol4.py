@@ -136,10 +136,24 @@ def display_matches(im1, im2, pos1, pos2, inliers):
     # plt.plot([out1[:, 1], out2[:, 1] + im1.shape[1]], [out1[:, 0], out2[:, 0]], mfc='r', c='b', lw=0.4, ms=5, marker='o')
     plt.show()
 
-# --------------------------3.4-----------------------------#
+# --------------------------4.1-----------------------------#
 
 def accumulate_homographies(H_successive, m):
-    return
+    #############################################################
+    # compute accumulated homographies between successive images
+    #############################################################
+
+    ret_H = np.zeros(H_successive.shape)
+    ret_H[m] = np.eye(3)
+    for i in reversed(range(m)):
+        ret_H[i] = H_successive[i].dot(ret_H[i + 1])
+
+    ret_H[m:] = np.apply_along_axis(np.linalg.inv, 0, H_successive[m:])
+
+    for i in range(m + 1, H_successive.shape[0]):
+        ret_H[i] = ret_H[i].dot(ret_H[i - 1])
+
+    return ret_H
 
 # --------------------------4.3-----------------------------#
 
