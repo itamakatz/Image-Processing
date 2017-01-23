@@ -96,12 +96,13 @@ def match_features(desc1, desc2, min_score):
     #############################################################    #############################################################
     # compute accumulated homographies between successive images
     #############################################################
-# def apply_homography(pos1, H12):
-#     def apply_single_homography(H12, pair):
-#         coordin = np.array([pair[0], pair[1], 1])
-#         product = np.dot(H12, coordin)
-#         return product[:2] / product[2]
-#     return np.apply_along_axis(functools.partial(apply_single_homography, H12), 1, pos1)
+
+def apply_homography(pos1, H12):
+    def apply_single_homography(H12, pair):
+        coordin = np.array([pair[0], pair[1], 1])
+        product = np.dot(H12, coordin)
+        return product[:2] / product[2]
+    return np.apply_along_axis(functools.partial(apply_single_homography, H12), 1, pos1)
 
 # def apply_homography(pos1, H12):
 #
@@ -151,35 +152,100 @@ def accumulate_homographies(H_successive, m):
     # compute accumulated homographies between successive images
     #############################################################
 
-    ret_H = np.zeros(H_successive.shape)
+    ret_H = np.zeros([len(H_successive), 3, 3])
+
     ret_H[m] = np.eye(3)
     for i in reversed(range(m)):
         ret_H[i] = H_successive[i].dot(ret_H[i + 1])
 
-    ret_H[m:] = np.apply_along_axis(np.linalg.inv, 0, H_successive[m:])
+    def invert_mat(mat):
+        return np.linalg.inv(mat)
 
-    for i in range(m + 1, H_successive.shape[0]):
+    ret_H[m:] = np.array(list(map(np.linalg.inv, H_successive[m:])))
+
+    for i in range(m + 1, len(H_successive)):
         ret_H[i] = ret_H[i].dot(ret_H[i - 1])
 
     return np.divide(ret_H, ret_H[:,2,2])
 
 # --------------------------4.3-----------------------------#
 
-# NOT REQUIRED
-# def prepare_panorama_base(ims, Hs):
-#     return
-
-
 def render_panorama(ims, Hs):
-    # def apply_homography(pos1, H12):
-    def relevant_points(im):
-        return np.array((im[0, 0], im[0,- 1], im[-1, 0],
-                         im[-1, -1], im[im[0] // 2, im[1] // 2]))
 
-    relevant_points = np.apply_along_axis(relevant_points, 0, ims)
+    def orig_points(im):
+        return np.array(([0, 0], [0, im.shape[1] - 1],
+                  [im.shape[0] - 1, 0], [im.shape[0], im.shape[1] - 1],
+                  [(im.shape[0] - 1) // 2, (im.shape[1] - 1) // 2]))
+
+    orig_coor_points = np.array(list(map(orig_points, ims)))
+
+    transformed_points = np.zeros(orig_coor_points.shape)
+
+    for i in range(orig_coor_points.shape[0]):
+        transformed_points[0] = apply_homography(transformed_points, Hs)
+
+    xy_max = np.amax(transformed_points[:, :-1], 2)
+    xy_min = np.amin(transformed_points[:, :-1], 2)
 
 
-    return
+
+    t_points = np.zeros((len(ims), 5))
+
+    for i in range(len(ims)):
+        rows, cols = float(ims[i].shape[0]), float(ims[i].shape[1])
+        points = [[0, 0], [rows - 1, 0], [0, cols - 1], [rows - 1, cols - 1]], [(rows-1)/2, -1]
+        # corners = [[0, 0], [rows - 1, 0], [0, cols - 1], [rows - 1, cols - 1]], [(rows-1)//2, -1] ===========================
+        new_points = np.array(apply_homography(points, Hs[i]))
+        t_points[i, 0] = np.max(new_points[:, 0])
+        t_points[i, 1] = np.min(new_points[:, 0])
+        t_points[i, 2] = np.max(new_points[:, 1])
+        t_points[i, 3] = np.min(new_points[:, 1])
+        t_points[i, 4] = new_points[4]
+        # p_corner[i, 4] = np.array(apply_homography([[(rows-1)//2]], Hs[i])) ===============================================
+
+    pano_lims = [np.amin(t_points[:-1], axis=1), np.amax(t_points[:-1], axis=1)]
+    # pano_lims = np.min(t_points[:, 3], t_points[:, 1]), np.max(t_points[:, 2], t_points[:, 0])
+    # Xmin, Xmax = np.min(t_points[:, 3]), np.max(t_points[:, 2])
+    # Ymin, Ymax = np.min(t_points[:, 1]), np.max(t_points[:, 0])
+    Ypano, Xpano = np.meshgrid(np.arange(pano_lims[0], pano_lims[2] + 1), np.arange(pano_lims[1], pano_lims[3] + 1))
+    panorama = np.zeros_like(Xpano)
+    # calculate borders
+    borders = [0]
+    for i in range(len(ims) - 1):
+        borders.append(np.round((t_points[i, 4] + t_points[i + 1, 4]) / 2) - pano_lims[0])
+        # borders.append(np.round((p_corner[i, 4]+p_corner[i+1, 4]) // 2) - Xmin) ===============================================
+    borders.append(panorama.shape[1])
+
+    # rendering
+    for i in range(len(ims)):
+        left_border, right_border = int(borders[i]), int(borders[i+1])
+        X, Y = Xpano[:,left_border:right_border], Ypano[:,left_border:right_border]
+        indices = np.array(apply_homography(np.transpose([X.ravel(), Y.ravel()]), np.linalg.inv(Hs[i])))
+        strip = panorama[:, left_border:right_border]
+        image = map_coordinates(ims[i], [indices[:, 0], indices[:,1]], order=1, prefilter=False)
+        panorama[:, left_border:right_border] = image.reshape(strip.shape)
+
+    ### ATTENTION ###
+    # I intentionally used this separated for loop for the blending part. The reason
+    # is that the resulting panorama after this block of code is more highlighted on
+    # the borders rather than if I return the panorama without the blending. So I split
+    # the blending from the rest of the code so you can comment it comfortably and see
+    # the difference yourself (if you want:) )
+    # I could not figure out the problem.
+
+    for i in range(len(ims)-1):
+        border = int(borders[i+1])
+        mask_strip = np.zeros_like(panorama)
+        mask_strip[:,border:] = np.ones_like(mask_strip[:,border:])
+        left_im = panorama[:,:border]
+        right_im = panorama[:,border:]
+        left_im_pano = np.hstack((left_im, np.zeros((right_im.shape[0], right_im.shape[1]))))
+        right_im_pano = np.hstack((np.zeros((left_im.shape[0], left_im.shape[1])), right_im))
+        panorama = ut.pyramid_blending(right_im_pano, left_im_pano, mask_strip, 4, 31, 31)
+
+    return panorama
+
+
 
 if __name__ == '__main__':
 
