@@ -30,8 +30,6 @@ def generate_panorama(data_dir, file_prefix, num_images, figsize=(20,20)):
     # Compute homography using RANSAC.
     H12, inliers = sol4.ransac_homography(points1, points2, 10000, 6)
 
-    # Display inlier and outlier matches.
-    #sol4.display_matches(ims[i], ims[i+1], points1 , points2, inliers=inliers)
     Hs.append(H12)
 
   # Compute composite homographies from the panorama coordinate system.
@@ -50,9 +48,7 @@ def generate_panorama(data_dir, file_prefix, num_images, figsize=(20,20)):
   plt.show()
 
 def main():
-  # generate_panorama('external/', 'office'  , 4)
-  generate_panorama('external/', 'backyard', 3, (20,10))
-  # generate_panorama('external/', 'oxford'  , 2)
+  generate_panorama('external/', 'salon', 3)
 
 if __name__ == '__main__':
   main()

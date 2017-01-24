@@ -1,12 +1,10 @@
-ITAMAKATZ
+itamakatz
 
-==== README for ex1 ===
+==== README for ex4 ===
 
 List of submitted files:
 
 README - this file
-answer_qt1.txt - Answer to question Q1
-answer_qt2.txt - Answer to question Q2
-answer_qt3.txt - Answer to question Q3
-sol2.py - python3 code
-
+sol4.py - python3 code
+sol4_utils.py - helper functions
+my_panorama.py - creates my example panorama
