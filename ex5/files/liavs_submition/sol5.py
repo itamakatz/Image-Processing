@@ -12,8 +12,6 @@ from scipy.ndimage import filters as flt
 import sol5_utils as sut
 import numpy as np
 
-import matplotlib.pyplot as plt
-
 
 #--------------------------helpers-----------------------------#
 
@@ -23,6 +21,7 @@ def read_image(filename, representation):
     """
     image = imread(filename).astype(np.float32) / 255
     return image if representation == 2 else rgb2gray(image)
+
 
 def learn_X_model(quick_mode, load_func, corr_func, cs, nc, ne):
     """
@@ -34,7 +33,7 @@ def learn_X_model(quick_mode, load_func, corr_func, cs, nc, ne):
         """
         return add_gaussian_noise(im, 0, 0.2) if corr_func == "gaussian_noise" \
             else random_motion_blur(im, [7])
-
+    #######################################################
     images = load_func()
     batch_size = 100
     sam_per_epoch = 10000
@@ -101,9 +100,8 @@ def build_nn_model(height, width, num_channels):
     conv = klay.Convolution2D(num_channels, 3, 3, border_mode="same")(input_)
     relu = klay.Activation("relu")(conv)
     after_resblocks = repeat(resblock, relu, num_channels, 5)
-    final = klay.merge([after_resblocks, relu], mode="sum")
-    final = klay.Convolution2D(1, 3, 3, border_mode="same")(final)
-    output = klay.Activation("relu")(final)
+    final = klay.merge([relu, after_resblocks], mode="sum")
+    output = klay.Convolution2D(1, 3, 3, border_mode="same")(final)
     return kmod.Model(input_, output)
 
 #--------------------------5-----------------------------#
@@ -124,7 +122,7 @@ def train_model(model, images, corruption_func, batch_size,
 
 def restore_image(corrupted_image, base_model, num_channels):
     """
-    restores the corrupted image according to the learning
+    restores the corrupted image according to the learning model
     """
     height, width = corrupted_image.shape[0], corrupted_image.shape[1]
     corrupted_image = np.array(corrupted_image).reshape(1, height, width)-0.5
@@ -174,124 +172,3 @@ def learn_deblurring_model(quick_mode=False):
     return learn_X_model(quick_mode, sut.images_for_deblurring, "random_motion_blur", 16, 32, 10)
 
 #--------------------------end-----------------------------#
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def main(test):
-    if test == 1:
-        im = read_image("image_dataset/train/3096.jpg", 1)
-        noised_im = add_gaussian_noise(im, 0, 0.2)
-        plt.imshow(noised_im, cmap=plt.cm.gray)
-        plt.show()
-
-    if test == 5:
-        im = read_image("text_dataset/train/0000005_orig.png", 1)
-        noised_im = random_motion_blur(im, [7])
-
-        model, channels = learn_deblurring_model(True)
-        restored = restore_image(noised_im, model, channels)
-        fig = plt.figure()
-        ax1 = fig.add_subplot(1, 2, 1, label="noise")
-        ax1.title.set_text("noise")
-        plt.imshow(noised_im, cmap=plt.cm.gray)
-        ax2 = fig.add_subplot(1, 2, 2)
-        ax2.title.set_text("restored")
-        plt.imshow(restored, cmap=plt.cm.gray)
-        plt.show()
-
-    if test == 6:
-        im = read_image("text_dataset/train/0000021_orig.png", 1)
-        noised = corrupted_image = random_motion_blur(im, [7])
-        untrained_model = build_nn_model(corrupted_image.shape[0], corrupted_image.shape[1], 32)
-        untrained_model.load_weights("blur_weight.txt")
-        corrupted_image = corrupted_image.reshape((1, corrupted_image.shape[0], corrupted_image.shape[1])) - 0.5
-        restored_im = untrained_model.predict(corrupted_image[np.newaxis, ...])[0] + 0.5  # todo should i add 0,5?
-        restored_im = np.clip(restored_im, 0, 1)
-        restored_im = restored_im.reshape((restored_im.shape[1], restored_im.shape[2]))
-        fig = plt.figure()
-        ax1 = fig.add_subplot(1, 2, 1)
-        ax1.title.set_text("blur")
-        plt.imshow(noised, cmap=plt.cm.gray)
-        ax2 = fig.add_subplot(1, 2, 2)
-        ax2.title.set_text("restored")
-        plt.imshow(restored_im, cmap=plt.cm.gray)
-        plt.show()
-
-    if test == 2:
-        im = read_image("image_dataset/train/2092.jpg", 1)
-        noised_im = random_motion_blur(im, [7])
-
-        model, channels = learn_denoising_model(True)
-        restored = restore_image(noised_im, model, channels)
-        fig = plt.figure()
-        ax1 = fig.add_subplot(1, 2, 1, label="noise")
-        ax1.title.set_text("noise")
-        plt.imshow(noised_im, cmap=plt.cm.gray)
-        ax2 = fig.add_subplot(1, 2, 2)
-        ax2.title.set_text("restored")
-        plt.imshow(restored, cmap=plt.cm.gray)
-        plt.show()
-
-    if test == 3:
-        im = read_image("image_dataset/train/2092.jpg", 1)
-        noised = corrupted_image = add_gaussian_noise(im, 0, 0.2)
-        untrained_model = build_nn_model(corrupted_image.shape[0], corrupted_image.shape[1], 48)
-        untrained_model.load_weights("denoise_weight.txt")
-        corrupted_image = corrupted_image.reshape((1, corrupted_image.shape[0], corrupted_image.shape[1])) - 0.5
-        restored_im = untrained_model.predict(corrupted_image[np.newaxis, ...])[0] + 0.5  # todo should i add 0,5?
-        restored_im = np.clip(restored_im, 0, 1)
-        restored_im = restored_im.reshape((restored_im.shape[1], restored_im.shape[2]))
-        fig = plt.figure()
-        ax1 = fig.add_subplot(1, 2, 1, label="noise")
-        ax1.title.set_text("noise")
-        plt.imshow(noised, cmap=plt.cm.gray)
-        ax2 = fig.add_subplot(1, 2, 2)
-        ax2.title.set_text("restored")
-        plt.imshow(restored_im, cmap=plt.cm.gray)
-        plt.show()
-    if test == 4:
-        images = sut.images_for_denoising()
-        train_images = images[:int(len(images) * 0.8)]
-        valid_images = images[int(len(images) * 0.8):]
-        batch_size = 30
-        for im in load_dataset(train_images, batch_size, corrupt_im, (1,16,16)):
-            fig = plt.figure()
-            ori = im[0].reshape(batch_size,im[0].shape[1], im[0].shape[2]) + 0.5
-            ori = im[1].reshape(batch_size,im[1].shape[1], im[1].shape[2]) + 0.5
-            ax1 = fig.add_subplot(1, 2, 1, label="noise")
-            plt.imshow(ori, cmap=plt.cm.gray)
-            ax2 = fig.add_subplot(1, 2, 2)
-            ax2.title.set_text("restored")
-            plt.imshow(restored, cmap=plt.cm.gray)
-            plt.show()
-
-
-
-
-if __name__ == '__main__':
-    main(2)
-
-
-
-
-
-
-
-
-
-
-
-
-
