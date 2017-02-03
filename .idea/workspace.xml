@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex5/files/liavs_submition/sol5.py" afterPath="$PROJECT_DIR$/ex5/files/liavs_submition/sol5.py" />
     </list>
     <ignored path="ex1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -705,13 +704,6 @@
       <option name="presentableId" value="Default" />
       <updated>1479144846597</updated>
     </task>
-    <task id="LOCAL-00011" summary="Started task 3.5.">
-      <created>1479997219003</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1479997219003</updated>
-    </task>
     <task id="LOCAL-00012" summary="Finished the color part of task 3.5.  yet to finish the B&amp;W">
       <created>1480019922751</created>
       <option name="number" value="00012" />
@@ -1048,7 +1040,14 @@
       <option name="project" value="LOCAL" />
       <updated>1485523379552</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="ex5 - added liavs sol5">
+      <created>1486122314606</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1486122314607</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1099,7 +1098,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ex3 - done with display_pyramid" />
     <MESSAGE value="ex3 - finished code. I need to make the photos for the last part and delete extra for loops" />
     <MESSAGE value="ex3 - used some functional programing (map, functools.partial - carry function) to avoid for loops. may need to go back" />
     <MESSAGE value="ex3 - finished code documentation" />
@@ -1124,7 +1122,8 @@
     <MESSAGE value="ex4 - in the middle of  4.2 - rendering" />
     <MESSAGE value="ex4 - done" />
     <MESSAGE value="ex5 - create directories" />
-    <option name="LAST_COMMIT_MESSAGE" value="ex5 - create directories" />
+    <MESSAGE value="ex5 - added liavs sol5" />
+    <option name="LAST_COMMIT_MESSAGE" value="ex5 - added liavs sol5" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
