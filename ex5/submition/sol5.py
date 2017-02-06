@@ -19,7 +19,6 @@ def load_dataset(filenames, batch_size, corruption_func, crop_size):
     currupt_im_dict = {}
 
     while True:
-        im, currupt_im  = None, None
         rand_file = random.choice(filenames)
 
         if rand_file in im_dict:
@@ -32,10 +31,20 @@ def load_dataset(filenames, batch_size, corruption_func, crop_size):
             currupt_im_dict[rand_file] = currupt_im
 
         rand = np.random.rand(2, batch_size)
-        rand_row = np.multiply(rand[0] , (im.shape[0] - crop_size[0])).astype(np.int_)
-        rand_col = np.multiply(rand[1] , (im.shape[1] - crop_size[1])).astype(np.int_)
+        rand_row = np.trunc(np.multiply(rand[0] , (im.shape[0] - crop_size[0]))).astype(np.int_)
+        rand_col = np.trunc(np.multiply(rand[1] , (im.shape[1] - crop_size[1]))).astype(np.int_)
 
-        yield
+        source_batch = np.empty(batch_size, 1, crop_size[0], crop_size[1])
+        target_batch = np.empty(source_batch.shape)
+
+        for i in range(batch_size):
+            source_batch[i, 0] = currupt_im[rand_row[i]:rand_row[i] + currupt_im.shape[0],
+                                            rand_col[i]:rand_col[i] + currupt_im.shape[1]]
+            target_batch[i, 0] = im[rand_row[i]:rand_row[i] + im.shape[0], rand_col[i]:rand_col[i] + im.shape[1]]
+
+        yield (source_batch, target_batch)
+
+
 def corruption_func(im):
     return
 
