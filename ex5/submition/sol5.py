@@ -2,6 +2,8 @@ import random
 import numpy as np
 from scipy.misc import imread
 from skimage.color import rgb2gray
+from keras.models import Model
+from keras.layers import Input, Convolution2D, Activation, merge
 
 def read_image(filename, representation):
     # filename - file to open as image
@@ -45,7 +47,29 @@ def load_dataset(filenames, batch_size, corruption_func, crop_size):
         yield (source_batch, target_batch)
 
 
-def corruption_func(im):
-    return
+def resblock(input_tensor, num_channels):
+    conv_func = lambda tensor: Convolution2D(num_channels, 3, 3, border_mode = "same")(tensor)
+    return merge([input_tensor, conv_func(Activation("relu")(conv_func(input_tensor)))], mode = "sum")
 
-# data_generator = load_dataset(filenames, batch_size, corruption_func, crop_size)
+
+def build_nn_model(height, width, num_channels):
+    iter_times = 5 ########################################################### WHY !?!? ################################################3
+
+    def applay_resblock(ReLu, iter_times):
+        if iter_times: return ReLu
+        return applay_resblock(resblock(ReLu, num_channels), iter_times - 1)
+
+    conv_func = lambda channels, tensor: Convolution2D(channels, 3, 3, border_mode = "same")(tensor)
+    input = Input(shape = (1, height, width))
+    relu = Activation("relu")(conv_func(num_channels, input))
+    output = conv_func(1, merge([relu, applay_resblock(relu, num_channels)], mode = "sum"))
+    return Model(input, output)
+
+# def train_model(model, images, corruption_func, batch_size,
+#                 samples_per_epoch, num_epochs, num_valid_sample):
+#     training, validation = np.split(images, [int(len(images)*0.8)])
+#     training_set = load_dataset(training, batch_size, corruption_func, model.input_shape[2:])
+#     validation_set = load_dataset(validation, batch_size, corruption_func, model.input_shape[2:])
+#     model.compile(loss="mean_squared_error", optimizer=Adam(beta_2=0.9))
+#     model.fit_generator(training_set, samples_per_epoch=samples_per_epoch, nb_epoch=num_epochs,
+#                         validation_data=validation_set, nb_val_samples=num_valid_sample)
