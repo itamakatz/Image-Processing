@@ -78,9 +78,27 @@ def train_model(model, images, corruption_func, batch_size,
 
 def restore_image(corrupted_image, base_model, num_channels):
 
-    height, width = corrupted_image.shape[0], corrupted_image.shape[1]
-    corrupted_image = np.array(corrupted_image).reshape(1, height, width) - 0.5
-    model = build_nn_model(height, width, num_channels)
-    model.set_weights(base_model.get_weights())
-    prediction = model.predict(corrupted_image[np.newaxis,...])[0] + 0.5
-    return np.clip(prediction,0,1).reshape(height, width)
+    new_model = build_nn_model(corrupted_image.shape[0], corrupted_image.shape[1], num_channels)
+    new_model.set_weights(base_model.get_weights())
+    prediction = new_model.predict(corrupted_image[np.newaxis, np.newaxis] - 0.5)[0] + 0.5
+    return np.clip(prediction,0,1).reshape(corrupted_image.shape)
+
+def add_gaussian_noise(image, min_sigma, max_sigma):
+
+    return np.clip(image + np.random.normal(scale=np.random.uniform(min_sigma, max_sigma),
+                                            size=image.shape), 0, 1)
+def learn_denoising_model(quick_mode=False):
+
+    return learn_X_model(quick_mode, sut.images_for_denoising, "gaussian_noise", 24, 48, 5)
+
+def add_motion_blur(image, kernel_size, angle):
+
+    return flt.convolve(image, sut.motion_blur_kernel(kernel_size, angle))
+
+def random_motion_blur(image, list_of_kernel_sizes):
+
+    return add_motion_blur(image, np.random.choice(list_of_kernel_sizes), np.random.uniform(high=np.pi))
+
+def learn_deblurring_model(quick_mode=False):
+
+    return learn_X_model(quick_mode, sut.images_for_deblurring, "random_motion_blur", 16, 32, 10)
