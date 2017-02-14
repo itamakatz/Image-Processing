@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="ex5 - 7 i think?">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ex5/submition/sol5_utils.py" afterPath="" />
+    <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex5/files/ex5_jupyter.ipynb" afterPath="$PROJECT_DIR$/ex5/files/ex5_jupyter.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ex5/submition/sol5.py" afterPath="$PROJECT_DIR$/ex5/submition/sol5.py" />
     </list>
     <ignored path="ex1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -759,13 +756,6 @@
       <option name="presentableId" value="Default" />
       <updated>1479144846597</updated>
     </task>
-    <task id="LOCAL-00017" summary="Started 1.2">
-      <created>1481292290193</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1481292290193</updated>
-    </task>
     <task id="LOCAL-00018" summary="Done with 1,  started 2.2">
       <created>1481469090679</created>
       <option name="number" value="00018" />
@@ -1102,7 +1092,14 @@
       <option name="project" value="LOCAL" />
       <updated>1487037838567</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="ex5 - 7 i think?">
+      <created>1487105643897</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1487105643898</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1153,7 +1150,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ex3 - 4.1 added the final blend images" />
     <MESSAGE value="ex4 - added all files and started code" />
     <MESSAGE value="ex4 - Added the shell with all the functions" />
     <MESSAGE value="ex4 - Added all the functions related sol4_utils.py" />
@@ -1178,7 +1174,8 @@
     <MESSAGE value="ex5 - finished writing load_dataset" />
     <MESSAGE value="ex5 - done writing section 4" />
     <MESSAGE value="ex5 - SOMEWHERE" />
-    <option name="LAST_COMMIT_MESSAGE" value="ex5 - SOMEWHERE" />
+    <MESSAGE value="ex5 - 7 i think?" />
+    <option name="LAST_COMMIT_MESSAGE" value="ex5 - 7 i think?" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
