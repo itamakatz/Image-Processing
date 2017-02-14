@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+import sys, subprocess, os, shutil
+
+try:
+    shutil.rmtree('current')
+except:
+    pass
+os.makedirs('current')
+with open('current/__init__.py', 'w') as f:
+    f.write(' ')
+subprocess.check_call(['unzip', sys.argv[1], '-d', 'current/'])
+shutil.copy('extra_files_for_students/sol5_utils.py', 'current/')
+subprocess.check_call(['unzip', '-qq', 'datasets/text_dataset.zip', '-d', 'current/'])
+subprocess.check_call(['unzip', '-qq', 'datasets/image_dataset.zip', '-d', 'current/'])
+#shutil.copytree('presubmit_externals','current/presubmit_externals')
+### Supress matplotlib figures if display not available ###
+if os.getenv('DISPLAY') is None or os.getenv('DISPLAY') == '':
+    import matplotlib
+    matplotlib.use('PS')
+###########
+sys.path.append(os.path.abspath('current/'))
+os.environ['KERAS_BACKEND'] = 'tensorflow'
+from keras import backend
+backend.set_epsilon(1e-07)
+backend.set_floatx('float32')
+backend.set_image_dim_ordering('th')
+import ex5_presubmit
+ex5_presubmit.presubmit()
+backend.clear_session()
