@@ -1,10 +1,11 @@
-import random
 import numpy as np
+import sol5_utils as ut
 from scipy.misc import imread
-from skimage.color import rgb2gray
 from keras.models import Model
-from keras.layers import Input, Convolution2D, Activation, merge
 from keras.optimizers import Adam
+from scipy.ndimage import filters
+from skimage.color import rgb2gray
+from keras.layers import Input, Convolution2D, Activation, merge
 
 def read_image(filename, representation):
     # filename - file to open as image
@@ -22,7 +23,7 @@ def load_dataset(filenames, batch_size, corruption_func, crop_size):
     currupt_im_dict = {}
 
     while True:
-        rand_file = random.choice(filenames)
+        rand_file = np.random.choice(filenames)
 
         if rand_file in im_dict:
             im = im_dict[rand_file]
@@ -83,22 +84,41 @@ def restore_image(corrupted_image, base_model, num_channels):
     prediction = new_model.predict(corrupted_image[np.newaxis, np.newaxis] - 0.5)[0] + 0.5
     return np.clip(prediction,0,1).reshape(corrupted_image.shape)
 
+def learn(quick_mode, load_func, corr_func, model, ne):
+
+    if quick_mode:
+        batch_size = 10
+        sam_per_epoch = 30
+        num_epochs = 2
+        num_valid_sample = 30
+    else:
+        batch_size = 100
+        sam_per_epoch = 10000
+        num_epochs = ne
+        num_valid_sample = 1000
+
+    train_model(model, load_func(), corr_func, batch_size, sam_per_epoch, num_epochs, num_valid_sample)
+    return model
+
 def add_gaussian_noise(image, min_sigma, max_sigma):
 
-    return np.clip(image + np.random.normal(scale=np.random.uniform(min_sigma, max_sigma),
-                                            size=image.shape), 0, 1)
-def learn_denoising_model(quick_mode=False):
+    return np.clip(image + np.random.normal(scale = np.random.uniform(min_sigma, max_sigma), size = image.shape),
+                   0, 1)
 
-    return learn_X_model(quick_mode, sut.images_for_denoising, "gaussian_noise", 24, 48, 5)
+def learn_denoising_model(quick_mode = False):
+
+    return learn(quick_mode, ut.images_for_denoising, lambda im: add_gaussian_noise(im, 0, 0.2),
+                         build_nn_model(24, 24, 48), 5), 48
 
 def add_motion_blur(image, kernel_size, angle):
 
-    return flt.convolve(image, sut.motion_blur_kernel(kernel_size, angle))
+    return filters.convolve(image, ut.motion_blur_kernel(kernel_size, angle))
 
 def random_motion_blur(image, list_of_kernel_sizes):
 
-    return add_motion_blur(image, np.random.choice(list_of_kernel_sizes), np.random.uniform(high=np.pi))
+    return add_motion_blur(image, np.random.choice(list_of_kernel_sizes), np.random.uniform(high = np.pi))
 
-def learn_deblurring_model(quick_mode=False):
+def learn_deblurring_model(quick_mode = False):
 
-    return learn_X_model(quick_mode, sut.images_for_deblurring, "random_motion_blur", 16, 32, 10)
+    return learn(quick_mode, ut.images_for_deblurring, lambda im: random_motion_blur(im, [7]),
+                         build_nn_model(16, 16, 32), 10), 32
