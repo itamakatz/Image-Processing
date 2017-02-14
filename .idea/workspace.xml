@@ -2,6 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc162d82-4a12-4ea1-8324-4d7512a42c5e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex5/files/image_dataset.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex5/files/presubmition/datasets/image_dataset.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex5/files/presubmition/datasets/text_dataset.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex5/files/presubmition/ex5.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex5/files/presubmition/presubmit_externals/image.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex5/files/presubmition/presubmit_externals/text.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex5/files/text_dataset.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex5/files/presubmition/datasets/README" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex5/files/presubmition/ex5_presubmit.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex5/files/presubmition/extra_files_for_students/sol5_utils.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex5/files/presubmition/test" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ex5/submition/answer_q1.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ex1.iws" />
@@ -59,7 +71,7 @@
         <entry file="file://$PROJECT_DIR$/ex5/submition/sol5.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="261">
-              <caret line="120" column="47" lean-forward="false" selection-start-line="120" selection-start-column="47" selection-end-line="120" selection-end-column="47" />
+              <caret line="120" column="47" lean-forward="false" selection-start-line="120" selection-start-column="46" selection-end-line="120" selection-end-column="47" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -770,13 +782,6 @@
       <option name="presentableId" value="Default" />
       <updated>1479144846597</updated>
     </task>
-    <task id="LOCAL-00022" summary="Done debugging :)">
-      <created>1481492351606</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1481492351606</updated>
-    </task>
     <task id="LOCAL-00023" summary="Done with comments">
       <created>1481492917396</created>
       <option name="number" value="00023" />
@@ -1113,7 +1118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1487109755560</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="ex5 - Done coding">
+      <created>1487109771772</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1487109771772</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1127,7 +1139,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1176" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2196162" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893497" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1135,7 +1147,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893497" sideWeight="0.4978678" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893497" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31573987" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31573987" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893497" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1552,7 +1564,7 @@
     <entry file="file://$PROJECT_DIR$/ex5/submition/sol5.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
-          <caret line="120" column="47" lean-forward="false" selection-start-line="120" selection-start-column="47" selection-end-line="120" selection-end-column="47" />
+          <caret line="120" column="47" lean-forward="false" selection-start-line="120" selection-start-column="46" selection-end-line="120" selection-end-column="47" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
