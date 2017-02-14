@@ -4,6 +4,7 @@ from scipy.misc import imread
 from skimage.color import rgb2gray
 from keras.models import Model
 from keras.layers import Input, Convolution2D, Activation, merge
+from keras.optimizers import Adam
 
 def read_image(filename, representation):
     # filename - file to open as image
@@ -46,30 +47,40 @@ def load_dataset(filenames, batch_size, corruption_func, crop_size):
 
         yield (source_batch, target_batch)
 
+conv_func = lambda channels, tensor: Convolution2D(channels, 3, 3, border_mode = "same")(tensor)
 
 def resblock(input_tensor, num_channels):
-    conv_func = lambda tensor: Convolution2D(num_channels, 3, 3, border_mode = "same")(tensor)
-    return merge([input_tensor, conv_func(Activation("relu")(conv_func(input_tensor)))], mode = "sum")
+    return merge([input_tensor,
+                  conv_func(num_channels, Activation("relu")(conv_func(num_channels, input_tensor)))], mode = "sum")
 
 
 def build_nn_model(height, width, num_channels):
-    iter_times = 5 ########################################################### WHY !?!? ################################################3
 
     def applay_resblock(ReLu, iter_times):
         if iter_times: return ReLu
         return applay_resblock(resblock(ReLu, num_channels), iter_times - 1)
 
-    conv_func = lambda channels, tensor: Convolution2D(channels, 3, 3, border_mode = "same")(tensor)
     input = Input(shape = (1, height, width))
     relu = Activation("relu")(conv_func(num_channels, input))
-    output = conv_func(1, merge([relu, applay_resblock(relu, num_channels)], mode = "sum"))
+    output = conv_func(1, merge([relu, applay_resblock(relu, 5)], mode = "sum"))
     return Model(input, output)
 
-# def train_model(model, images, corruption_func, batch_size,
-#                 samples_per_epoch, num_epochs, num_valid_sample):
-#     training, validation = np.split(images, [int(len(images)*0.8)])
-#     training_set = load_dataset(training, batch_size, corruption_func, model.input_shape[2:])
-#     validation_set = load_dataset(validation, batch_size, corruption_func, model.input_shape[2:])
-#     model.compile(loss="mean_squared_error", optimizer=Adam(beta_2=0.9))
-#     model.fit_generator(training_set, samples_per_epoch=samples_per_epoch, nb_epoch=num_epochs,
-#                         validation_data=validation_set, nb_val_samples=num_valid_sample)
+def train_model(model, images, corruption_func, batch_size,
+            samples_per_epoch, num_epochs, num_valid_sample):
+
+    training_set = images[np.floor(len(images) * 0.8)]
+    validation_set = images[np.ceil(len(images) * 0.2)]
+    load_func = lambda set: load_dataset(set, batch_size, corruption_func, model.input_shape[2:])
+
+    model.compile(loss = "mean_squared_error", optimizer = Adam(beta_2 = 0.9))
+    model.fit_generator(load_func(training_set), samples_per_epoch=samples_per_epoch, nb_epoch=num_epochs,
+                        validation_data = load_func(validation_set), nb_val_samples=num_valid_sample)
+
+def restore_image(corrupted_image, base_model, num_channels):
+
+    height, width = corrupted_image.shape[0], corrupted_image.shape[1]
+    corrupted_image = np.array(corrupted_image).reshape(1, height, width) - 0.5
+    model = build_nn_model(height, width, num_channels)
+    model.set_weights(base_model.get_weights())
+    prediction = model.predict(corrupted_image[np.newaxis,...])[0] + 0.5
+    return np.clip(prediction,0,1).reshape(height, width)
