@@ -2,9 +2,8 @@ itamakatz
 
 ==== README for ex4 ===
 
-List of submitted files:
+List of files:
 
-README - this file
-sol4.py - python3 code
-sol4_utils.py - helper functions
-my_panorama.py - creates my example panorama
+README
+answer_q1.txt
+sol5.py

@@ -1,24 +1,31 @@
+Q1:
 
-Answer to Q1:
-============
+In the case of upscaling an image we do mostly the as with deblurring or denoising.
 
-The idea is as follows.
-Our corruption function will, randomly, choose an image size
-from a given list of image sizes and resize the current-iteration
-image to that size. We slightly modify this function so it
-returns not only the corrupted image, but the size it chose
-(Lets call this size corrupted_size). Next, instead of extracting
-corresponding patches of the same size in each iteration,
-we will extract crop_size sized patches from the clean images,
-and "adjusted" crop_size sized patches from the corrupted images,
-where the adjustment is calculated from the returned corrupted_size.
-Then, for each "adjusted" crop_size sized patch we will use linear
-interpolation to resize it to crop_size, and then add it to the
-"source" batch.
-In addition to that, we add a wrapper function to the restore_image
-function, which takes three arguments - corrupted_image, clean_size
-and num_channels. clean-size is the size of one of the clean images
-in the in the repository. This wrapper function will resize
-corrupted_image to the size of clean_size, and then calls restore_image
-with the new cropped image and num_channels, and returns the prediction
-restore_image has returned.
+I the last two, what we did was to applay random blur or noise to a large set of images 
+and try to find the inverse function of the blur or noise correspondingly and check the 
+result according to the original image.
+
+In our case, istead of noise or blur we need to aplly resizing to the images in our set. 
+since we want to upscale, we shall downscale and try to upscale it back to the original 
+size. Thus, the curroption function in our case will downscaling an image by a random 
+factor which can be bound by us as a type of hyper-parameter.
+
+At this point there could be a few approaches. In my opinio the most resonable would be
+to leave the downscaled pictures in the source list as is and let the dnn find the 
+cresponding inverse function. The reason is that interpolating by ourself misses the 
+point of what we are looking for.
+
+In addition we could use the patches idea by trying small areas of the image we would 
+like to find, just like we did in the past examples.
+
+An interesting point is that like we learned, to downsample an image we first have to 
+BLUR! That means that the algorithm will infact try to fined the inverse to the 
+blurring application done by us while downsampling.
+
+Another point is that this problem is very broad and so we must give a lot of prior 
+knowledge as Hyper-parameters not to overfit. The reason is that after all we are 
+looking for an interpolating function.
+
+Bottom line, we see that the external example-based methods using patches is very
+general and can work grate with a varaity of problems including SR

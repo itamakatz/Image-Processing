@@ -8,46 +8,50 @@ from scipy.ndimage import filters
 from skimage.color import rgb2gray
 from keras.layers import Input, Convolution2D, Activation, merge
 
+
+RELU_DEEPNESS = 7
+
 def read_image(filename, representation):
-    # filename - file to open as image
-    # representation - is it a B&W or color image
-    im = imread(filename)
-    # check if it is a B&W image
+    im = imread(filename) / 255
+
     if(representation == 1):
         im = rgb2gray(im)
-    # convert to float and normalize
-    return (im / 255).astype(np.float32)
+
+    return im.astype(np.float32)
+
 
 def load_dataset(filenames, batch_size, corruption_func, crop_size):
 
     im_dict = {}
     currupt_im_dict = {}
 
+    source = np.empty((batch_size, 1, crop_size[0], crop_size[1]), np.float32)
+    target = np.empty_like(source)
+
     while True:
-        rand_file = np.random.choice(filenames)
 
-        if rand_file in im_dict:
-            im = im_dict[rand_file]
-            currupt_im = currupt_im_dict[rand_file]
-        else:
-            im = read_image(rand_file, 1)
-            currupt_im = corruption_func(im) - 0.5
-            im_dict[rand_file] = im - 0.5
-            currupt_im_dict[rand_file] = currupt_im
-
-        rand = np.random.rand(2, batch_size)
-        rand_row = np.trunc(np.multiply(rand[0] , (im.shape[0] - crop_size[0]))).astype(np.int_)
-        rand_col = np.trunc(np.multiply(rand[1] , (im.shape[1] - crop_size[1]))).astype(np.int_)
-
-        source_batch = np.empty(batch_size, 1, crop_size[0], crop_size[1])
-        target_batch = np.empty(source_batch.shape)
+        rand_files = np.random.choice(filenames, batch_size)
 
         for i in range(batch_size):
-            source_batch[i, 0] = currupt_im[rand_row[i]:rand_row[i] + currupt_im.shape[0],
-                                            rand_col[i]:rand_col[i] + currupt_im.shape[1]]
-            target_batch[i, 0] = im[rand_row[i]:rand_row[i] + im.shape[0], rand_col[i]:rand_col[i] + im.shape[1]]
 
-        yield (source_batch, target_batch)
+            if rand_files[i] in im_dict:
+                im = im_dict[rand_files[i]]
+                currupt_im = currupt_im_dict[rand_files[i]]
+
+            else:
+                im = read_image(rand_files[i], 1)
+                currupt_im = corruption_func(im)
+                im_dict[rand_files[i]] = im
+                currupt_im_dict[rand_files[i]] = currupt_im
+
+            rows = np.random.randint(im.shape[0] - crop_size[0])
+            cols = np.random.randint(im.shape[1] - crop_size[1])
+
+            source[i, 0] = currupt_im[rows:rows + crop_size[0], cols:cols + crop_size[1]]
+            target[i, 0] = im[rows:rows + crop_size[0], cols:cols + crop_size[1]]
+
+        yield (source - 0.5, target - 0.5)
+
 
 conv_func = lambda channels, tensor: Convolution2D(channels, 3, 3, border_mode = "same")(tensor)
 
@@ -55,39 +59,39 @@ def resblock(input_tensor, num_channels):
     return merge([input_tensor,
                   conv_func(num_channels, Activation("relu")(conv_func(num_channels, input_tensor)))], mode = "sum")
 
-
 def build_nn_model(height, width, num_channels):
 
-    def applay_resblock(ReLu, iter_times):
-        if iter_times: return ReLu
-        return applay_resblock(resblock(ReLu, num_channels), iter_times - 1)
-
     input = Input(shape = (1, height, width))
-    relu = Activation("relu")(conv_func(num_channels, input))
-    output = conv_func(1, merge([relu, applay_resblock(relu, 5)], mode = "sum"))
+    original_relu = Activation("relu")(conv_func(num_channels, input))
+
+    relu = original_relu
+    for i in range(RELU_DEEPNESS):
+        relu = resblock(relu, num_channels)
+
+    output = conv_func(1, merge([original_relu, relu], mode = "sum"))
     return Model(input, output)
 
 def train_model(model, images, corruption_func, batch_size,
             samples_per_epoch, num_epochs, num_valid_sample):
 
-    training_set = images[np.floor(len(images) * 0.8)]
-    validation_set = images[np.ceil(len(images) * 0.2)]
+    training_set = images[:int(len(images) * 0.8)]
+    validation_set = images[int(len(images) * 0.8):]
     load_func = lambda set: load_dataset(set, batch_size, corruption_func, model.input_shape[2:])
 
     model.compile(loss = "mean_squared_error", optimizer = Adam(beta_2 = 0.9))
-    model.fit_generator(load_func(training_set), samples_per_epoch=samples_per_epoch, nb_epoch=num_epochs,
-                        validation_data = load_func(validation_set), nb_val_samples=num_valid_sample)
+    model.fit_generator(load_func(training_set), samples_per_epoch = samples_per_epoch, nb_epoch = num_epochs,
+                        validation_data = load_func(validation_set), nb_val_samples = num_valid_sample)
 
 def restore_image(corrupted_image, base_model, num_channels):
 
     new_model = build_nn_model(corrupted_image.shape[0], corrupted_image.shape[1], num_channels)
     new_model.set_weights(base_model.get_weights())
     prediction = new_model.predict(corrupted_image[np.newaxis, np.newaxis] - 0.5)[0] + 0.5
-    return np.clip(prediction,0,1).reshape(corrupted_image.shape)
+    return np.clip(prediction,0,1).reshape(corrupted_image.shape).astype(np.float32)
 
 def add_gaussian_noise(image, min_sigma, max_sigma):
 
-    return np.clip(image + np.random.normal(scale = np.random.uniform(min_sigma, max_sigma), size = image.shape),
+    return np.clip(image + np.random.normal(scale = np.random.uniform(min_sigma, max_sigma), size = image.shape).astype(np.float32),
                    0, 1)
 
 def learn_denoising_model(quick_mode = False):
@@ -104,6 +108,7 @@ def learn_denoising_model(quick_mode = False):
         num_valid_sample = 1000
 
     model = build_nn_model(24, 24, 48)
+
     train_model(model, ut.images_for_denoising(),
                 lambda im: add_gaussian_noise(im, 0, 0.2),
                 batch_size, sam_per_epoch, num_epochs, num_valid_sample)
@@ -132,7 +137,7 @@ def learn_deblurring_model(quick_mode = False):
         num_valid_sample = 1000
 
     model = build_nn_model(16, 16, 32)
-    train_model(model, ut.images_for_deblurring,
+    train_model(model, ut.images_for_deblurring(),
                 lambda im: random_motion_blur(im, [7]),
                 batch_size, sam_per_epoch, num_epochs, num_valid_sample)
 
@@ -141,9 +146,9 @@ def learn_deblurring_model(quick_mode = False):
 
 if __name__ == "__main__":
 
-    test = 1
+    test = 3
     if test == 1:
-        im = read_image("train/2092.jpg", 1)
+        im = read_image("image_dataset/train/35010.jpg", 1)
         noised_im = add_gaussian_noise(im, 0, 0.2)
         plt.imshow(noised_im, cmap=plt.cm.gray)
         plt.show()
@@ -164,16 +169,24 @@ if __name__ == "__main__":
         plt.show()
 
     if test == 3:
-        im = read_image("image_dataset/train/2092.jpg", 1)
-        noised_im = add_motion_blur(im, 0, 0.2)
+        im = read_image("image_dataset/train/35010.jpg", 1)
+        noised_im = add_motion_blur(im, 11, 0.2)
 
         model, channels = learn_denoising_model()
         restored = restore_image(noised_im, model, channels)
+
         fig = plt.figure()
-        ax1 = fig.add_subplot(1, 2, 1, label="noise")
+
+        ax1 = fig.add_subplot(2, 2, 1, label="noise")
         ax1.title.set_text("noise")
         plt.imshow(noised_im, cmap=plt.cm.gray)
-        ax2 = fig.add_subplot(1, 2, 2)
+
+        ax2 = fig.add_subplot(2, 2, 2)
         ax2.title.set_text("restored")
         plt.imshow(restored, cmap=plt.cm.gray)
+
+        ax3 = fig.add_subplot(2, 2, 3)
+        ax3.title.set_text("Original")
+        plt.imshow(im, cmap=plt.cm.gray)
+
         plt.show()
